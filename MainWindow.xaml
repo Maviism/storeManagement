@@ -1,0 +1,68 @@
+﻿<Window x:Class="storeManagement.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:storeManagement"
+        xmlns:viewModel="clr-namespace:storeManagement.MVVM.ViewModel"
+        mc:Ignorable="d"
+        Height="600" Width="920"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        Background="Transparent"
+        AllowsTransparency="True">
+
+    <Window.DataContext>
+        <viewModel:MainViewModel/>
+    </Window.DataContext>
+    
+    <Border Background="#272537" CornerRadius="20">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="75"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Shoes Store" 
+                       Foreground="#f4f4f4"
+                       FontSize="26"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       />
+
+            <StackPanel Grid.Row="1">
+                <RadioButton Content="Dashboard"
+                             Height="50"
+                             Foreground="#f4f4f4"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"
+                             IsChecked="True"
+                             Command="{Binding HomeViewCommand}"/>
+
+                <RadioButton Content="Transaction"
+                             Height="50"
+                             Foreground="#f4f4f4"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding TransactionViewCommand}"/>
+
+                <RadioButton Content="Manage stock"
+                             Height="50"
+                             Foreground="#f4f4f4"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"/>
+            </StackPanel>
+
+            <ContentControl Grid.Column="1"
+                            Grid.Row="1"
+                            Margin="10"
+                            Content="{Binding CurrentView}"
+                            />
+        </Grid>
+    </Border>
+</Window>
