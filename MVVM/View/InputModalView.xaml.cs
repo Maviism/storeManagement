@@ -10,27 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace storeManagement.MVVM.View
 {
     /// <summary>
-    /// Interaction logic for ManageStockView.xaml
+    /// Interaction logic for InputModalView.xaml
     /// </summary>
-    public partial class ManageStockView : UserControl
+    public partial class InputModalView : Window
     {
-        public ManageStockView()
+        public InputModalView()
         {
             InitializeComponent();
         }
-
-        private void input_modal(object sender, RoutedEventArgs e)
-        {
-            InputModalView inputModal = new InputModalView();
-            inputModal.ShowDialog();
-        }
-
-
     }
 }
