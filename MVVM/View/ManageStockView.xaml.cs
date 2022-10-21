@@ -16,23 +16,13 @@ using System.Windows.Shapes;
 namespace storeManagement.MVVM.View
 {
     /// <summary>
-    /// Interaction logic for TransactionView.xaml
+    /// Interaction logic for ManageStockView.xaml
     /// </summary>
-    public partial class TransactionView : UserControl
+    public partial class ManageStockView : UserControl
     {
-        public TransactionView()
+        public ManageStockView()
         {
             InitializeComponent();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
         }
     }
 }

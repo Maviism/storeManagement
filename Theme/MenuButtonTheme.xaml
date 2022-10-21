@@ -14,7 +14,7 @@
 
                             <TextBlock Text="{TemplateBinding Property=Content}"
                                        VerticalAlignment="Center"
-                                       Margin="50,0,0,0"
+                                       Margin="30,0,0,0"
                                        />
 
                         </Grid>
@@ -24,14 +24,17 @@
 
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Height" Value="50" />
 
         </Style.Setters>
 
         <Style.Triggers>
             <Trigger Property="IsChecked" Value="True">
-                <Setter Property="Background" Value="#22202f" />
+                <Setter Property="Background" Value="#D13E21" />
             </Trigger>
         </Style.Triggers>
     </Style>
-    
+
+
 </ResourceDictionary>

@@ -20,6 +20,10 @@
                 <view:TransactionView/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type viewModel:ManageStockViewModel}">
+                <view:ManageStockView/>
+            </DataTemplate>
+
         </ResourceDictionary>
          
     </Application.Resources>

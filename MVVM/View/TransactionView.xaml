@@ -8,5 +8,19 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <TextBlock Text="Transaction" Foreground="white" FontSize="28"/>
+        <Button Content="Payment" HorizontalAlignment="Left" Height="45" Margin="658,395,0,0" VerticalAlignment="Top" Width="122"/>
+        <Button Content="Add item" HorizontalAlignment="Left" Height="28" Margin="219,104,0,0" VerticalAlignment="Top" Width="94" Click="Button_Click"/>
+        <ComboBox HorizontalAlignment="Left" Margin="20,104,0,0" VerticalAlignment="Top" Width="194" Height="28">
+            <ComboBoxItem Content="Coffie"></ComboBoxItem>
+            <ComboBoxItem Content="Tea"></ComboBoxItem>
+            <ComboBoxItem Content="Orange Juice"></ComboBoxItem>
+            <ComboBoxItem Content="Milk"></ComboBoxItem>
+            <ComboBoxItem Content="Iced Tea"></ComboBoxItem>
+            <ComboBoxItem Content="Mango Shake"></ComboBoxItem>
+        </ComboBox>
+        <Label Content="Rp.100.000" HorizontalAlignment="Left" Height="49" Margin="20,42,0,0" Background="White" FontSize="30" Padding="8,3,0,3" VerticalAlignment="Top" Width="293"/>
+        <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" Margin="20,156,20,69" SelectionChanged="DataGrid_SelectionChanged"/>
+
+
     </Grid>
 </UserControl>

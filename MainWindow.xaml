@@ -6,17 +6,18 @@
         xmlns:local="clr-namespace:storeManagement"
         xmlns:viewModel="clr-namespace:storeManagement.MVVM.ViewModel"
         mc:Ignorable="d"
-        Height="600" Width="920"
+        Height="680" Width="1100"
         WindowStyle="None"
         ResizeMode="NoResize"
         Background="Transparent"
+        WindowStartupLocation="CenterScreen"
         AllowsTransparency="True">
 
     <Window.DataContext>
         <viewModel:MainViewModel/>
     </Window.DataContext>
     
-    <Border Background="#272537" CornerRadius="20">
+    <Border Background="#DF6E21">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200"/>
@@ -28,41 +29,40 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <TextBlock Text="Shoes Store" 
+            <TextBlock Text="Store Managemet System" 
                        Foreground="#f4f4f4"
-                       FontSize="26"
+                       FontSize="16"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
                        />
 
-            <StackPanel Grid.Row="1">
-                <RadioButton Content="Dashboard"
-                             Height="50"
-                             Foreground="#f4f4f4"
-                             FontSize="14"
-                             Style="{StaticResource MenuButtonTheme}"
-                             IsChecked="True"
-                             Command="{Binding HomeViewCommand}"/>
+            <Border Grid.Row="1" Background="#E7B183" Margin="10,0,10,10" CornerRadius="20" Padding="0,15,0,0">
+                <StackPanel >
 
-                <RadioButton Content="Transaction"
-                             Height="50"
-                             Foreground="#f4f4f4"
-                             FontSize="14"
-                             Style="{StaticResource MenuButtonTheme}"
-                             Command="{Binding TransactionViewCommand}"/>
+                    <RadioButton Content="Home"
+                                 Foreground="#f4f4f4"
+                                 Style="{StaticResource MenuButtonTheme}"
+                        
+                                 Command="{Binding HomeViewCommand}"/>
 
-                <RadioButton Content="Manage stock"
-                             Height="50"
-                             Foreground="#f4f4f4"
-                             FontSize="14"
-                             Style="{StaticResource MenuButtonTheme}"/>
-            </StackPanel>
+                    <RadioButton Content="Transaction"
+                                 Foreground="#f4f4f4"
+                                 Style="{StaticResource MenuButtonTheme}"
+                                 Command="{Binding TransactionViewCommand}"/>
 
-            <ContentControl Grid.Column="1"
-                            Grid.Row="1"
-                            Margin="10"
-                            Content="{Binding CurrentView}"
-                            />
+                    <RadioButton Content="Manage stock"
+                                 Foreground="#f4f4f4"
+                                 Style="{StaticResource MenuButtonTheme}"
+                                 IsChecked="True" 
+                                 Command="{Binding ManageStockViewCommand}"/>
+                </StackPanel>
+            </Border>
+
+            <Border Grid.Column="1" Grid.Row="1" Margin="0,0,10,10" Background="#E7B183" CornerRadius="15" Padding="10">
+                <ContentControl  
+                                Content="{Binding CurrentView}"/>
+            </Border>
+            
         </Grid>
     </Border>
 </Window>

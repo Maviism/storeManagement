@@ -12,9 +12,13 @@ namespace storeManagement.MVVM.ViewModel
         public RelayCommand HomeViewCommand { get; set; }
         public RelayCommand TransactionViewCommand { get; set; }
 
-        public HomeViewModel HomeVM { get; set; }
+        public RelayCommand ManageStockViewCommand { get; set; }
 
+        public HomeViewModel HomeVM { get; set; }
+    
         public TransactionViewModel TransactionVM { get; set; }
+
+        public ManageStockViewModel ManageStockVM { get; set; }
 
         private object _currentView;
 
@@ -31,8 +35,9 @@ namespace storeManagement.MVVM.ViewModel
         {
             HomeVM = new HomeViewModel();
             TransactionVM = new TransactionViewModel();
+            ManageStockVM = new ManageStockViewModel();
 
-            CurrentView = HomeVM;
+            CurrentView = ManageStockVM;
 
             HomeViewCommand = new RelayCommand(o =>
             {
@@ -42,6 +47,11 @@ namespace storeManagement.MVVM.ViewModel
             TransactionViewCommand = new RelayCommand(o =>
             {
                 CurrentView = TransactionVM;
+            });
+
+            ManageStockViewCommand = new RelayCommand(o =>
+            {
+                CurrentView = ManageStockVM;
             });
 
         }
