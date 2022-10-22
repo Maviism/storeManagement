@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:storeManagement.MVVM.View"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="400" d:DesignWidth="600"
+             >
     <StackPanel>
         <Label Content="Manage Stock" Foreground="White" FontSize="28"/>
         <Grid Margin="5">
@@ -17,23 +18,44 @@
             <Border>
                 <StackPanel Orientation="Horizontal">
                     <Button Style="{StaticResource PrimaryButton}" Content="Add Item" Margin="3" Click="input_modal"/>
-                    <Button Style="{StaticResource WarningButton}" Content="Update Item" Margin="3"/>
+                    <Button Style="{StaticResource WarningButton}" 
+                            Content="Refresh Data" Margin="3"
+                            Command="{Binding RefreshDataCommand}"/>
                 </StackPanel>
                 
             </Border>
             
             <Border Grid.Row="1" Margin="3,5,0,0">
-                <DataGrid AutoGenerateColumns="False">
+                <DataGrid x:Name="Products"
+                          AutoGenerateColumns="False"
+                          ItemsSource="{Binding Products.DefaultView}"
+                          HorizontalAlignment="Left"
+                          HorizontalScrollBarVisibility="Visible" 
+                          Width="800" Height="400"
+                          ColumnWidth="*">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="No" Width="30"/>
-                        <DataGridTextColumn Header="Product No" Width="100"/>
-                        <DataGridTextColumn Header="Product Name" Width="220"/>
-                        <DataGridTextColumn Header="Quantity" Width="80"/>
-                        <DataGridTextColumn Header="Price" Width="100"/>
-                        <DataGridTemplateColumn Header="Action" Width="80">
+                        <DataGridTextColumn Header="Product No" 
+                                            Binding="{Binding Product_no}" Width="100"/>
+                        <DataGridTextColumn Header="Product Name"
+                                            Binding="{Binding Product_name}"
+                                            Width="220"/>
+                        <DataGridTextColumn Header="Quantity" 
+                                            Binding="{Binding Quantity}"
+                                            Width="60"/>
+                        <DataGridTextColumn Header="Price" 
+                                            Binding="{Binding Price}"
+                                            Width="100"/>
+                        <DataGridTemplateColumn Header="Action" Width="170">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Tag="a">Delete</Button>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button Style="{StaticResource WarningButton}" Margin="0,0,5,0" Height="20">Update</Button>
+                                        <Button Command="{Binding Path=DataContext.DeleteDataBtnCommand, 
+                                        RelativeSource= {RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}"
+                                            CommandParameter="{Binding Product_no}"
+                                            Style="{StaticResource DangerButton}" Height="20">Delete</Button>
+                                    </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>

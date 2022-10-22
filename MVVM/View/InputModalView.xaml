@@ -5,8 +5,45 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:storeManagement.MVVM.View"
         mc:Ignorable="d"
-        Title="InputModalView" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="Add new item" Height="450" Width="500"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Background="Transparent">
+    
+    <Border Background="#DF6E21">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <Border>
+                <Label Content="Add new item" HorizontalAlignment="Center" FontSize="20" FontWeight="SemiBold"/>
+            </Border>
+
+            <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="15,5,15,0">
+                <StackPanel  HorizontalAlignment="Center">
+                    <Label Content="Product No"/>
+                    <Label Content="Product Name"/>
+                    <Label Content="Quantity"/>
+                    <Label Content="Price"/>
+                    <Label Content="Description"/>
+                        
+                </StackPanel>
+                <StackPanel Margin="0,3,0,0">
+                    <TextBox x:Name="Product_noInput" Width="250" Height="25" Padding="5,3,0,3" VerticalAlignment="Center"/>
+                    <TextBox x:Name="Product_nameInput" Width="250" Height="25" Padding="5,3,0,3" VerticalAlignment="Center"/>
+                    <TextBox x:Name="Product_qtyInput" Width="250" Height="25" Padding="5,3,0,3" VerticalAlignment="Center"/>
+                    <TextBox x:Name="Product_priceInput" Width="250" Height="25" Padding="5,3,0,3" VerticalAlignment="Center"/>
+                    <TextBox x:Name="Product_descInput" Width="250" Height="25" Padding="5,3,0,3" VerticalAlignment="Center"/>
+                </StackPanel>
+            </StackPanel>
+
+            <WrapPanel Grid.Row="2" HorizontalAlignment="Center" Margin="0,15,0,0">
+                <Button Content="Cancel" IsCancel="True" Width="70" Height="30" Margin="0,0,15,0"/>
+                <Button Content="Add item" Width="70" Click="Button_Click"/>
+            </WrapPanel>
+        </Grid>
+    </Border>
 </Window>

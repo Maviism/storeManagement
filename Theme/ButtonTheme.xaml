@@ -46,5 +46,15 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-    
+
+    <Style TargetType="Button"
+           x:Key="DangerButton" BasedOn="{StaticResource PrimaryButton}">
+        <Setter Property="Background" Value="#D81E17" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#B51016"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
 </ResourceDictionary>
