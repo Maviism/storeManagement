@@ -5,6 +5,7 @@
            TargetType="{x:Type RadioButton}"
            x:Key="MenuButtonTheme">
         <Style.Setters>
+            <Setter Property="Foreground" Value="WhiteSmoke"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="RadioButton">
@@ -29,9 +30,26 @@
 
         </Style.Setters>
 
+        
         <Style.Triggers>
             <Trigger Property="IsChecked" Value="True">
-                <Setter Property="Background" Value="#D13E21" />
+                <Setter Property="Background" Value="#BF5218"/>
+                <!--TODO Will be better if we can just throw fontweight to parentstyle -->
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="RadioButton">
+                            <Grid VerticalAlignment="Stretch" 
+                              HorizontalAlignment="Stretch"
+                              Background="{TemplateBinding Background}">
+                                <TextBlock Text="{TemplateBinding Property=Content}"
+                                       VerticalAlignment="Center"
+                                       Margin="30,0,0,0"
+                                       FontWeight="SemiBold"
+                                       />
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
             </Trigger>
         </Style.Triggers>
     </Style>

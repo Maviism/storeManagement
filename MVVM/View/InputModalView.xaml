@@ -41,8 +41,8 @@
             </StackPanel>
 
             <WrapPanel Grid.Row="2" HorizontalAlignment="Center" Margin="0,15,0,0">
-                <Button Content="Cancel" IsCancel="True" Width="70" Height="30" Margin="0,0,15,0"/>
-                <Button Content="Add item" Width="70" Click="Button_Click"/>
+                <Button Content="Cancel" Style="{StaticResource DangerButton}" IsCancel="True" Margin="0,0,15,0"/>
+                <Button Content="Add item" Style="{StaticResource SuccessButton}" Click="Button_Click"/>
             </WrapPanel>
         </Grid>
     </Border>

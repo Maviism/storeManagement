@@ -57,4 +57,14 @@
         </Style.Triggers>
     </Style>
 
+    <Style TargetType="Button"
+           x:Key="SuccessButton" BasedOn="{StaticResource PrimaryButton}">
+        <Setter Property="Background" Value="#09B97E" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#069B78"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
 </ResourceDictionary>
