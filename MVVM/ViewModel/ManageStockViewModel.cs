@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using storeManagement.Core;
+using storeManagement.MVVM.View;
 
 namespace storeManagement.MVVM.ViewModel
 {
@@ -16,6 +17,8 @@ namespace storeManagement.MVVM.ViewModel
 
         public RelayCommand ButtonTest { get; set; }
         public RelayCommand DeleteDataBtnCommand { get; set; }
+
+        public RelayCommand UpdateDataBtnCommand { get; set; }
 
         public RelayCommand RefreshDataCommand { get; set; }
 
@@ -64,6 +67,13 @@ namespace storeManagement.MVVM.ViewModel
             }
         }
 
+        private void UpdateData(object obj)
+        {
+            string name = obj.ToString();
+            UpdateModalView updateModalView = new UpdateModalView(name);
+            updateModalView.ShowDialog();
+        }
+
         public ManageStockViewModel()
         {
             Products = LoadGrid();
@@ -77,10 +87,18 @@ namespace storeManagement.MVVM.ViewModel
             {
                 DeleteData(o);
             });
+
+            UpdateDataBtnCommand = new RelayCommand(o =>
+            {
+                UpdateData(o);
+            });
+
             ButtonTest = new RelayCommand(o =>
             {
                 MessageBox.Show("Hello");
             });
+
+
         }
     }
 }
