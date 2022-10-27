@@ -4,22 +4,64 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:storeManagement.MVVM.View"
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="900"
+             >
     <Grid>
-        <TextBlock Text="Transaction" Foreground="white" FontSize="28"/>
-        <Button Content="Payment" HorizontalAlignment="Left" Height="45" Margin="658,395,0,0" VerticalAlignment="Top" Width="122"/>
-        <Button Content="Add item" HorizontalAlignment="Left" Height="28" Margin="219,104,0,0" VerticalAlignment="Top" Width="94" Click="Button_Click"/>
-        <ComboBox HorizontalAlignment="Left" Margin="20,104,0,0" VerticalAlignment="Top" Width="194" Height="28">
-            <ComboBoxItem Content="Coffie"></ComboBoxItem>
-            <ComboBoxItem Content="Tea"></ComboBoxItem>
-            <ComboBoxItem Content="Orange Juice"></ComboBoxItem>
-            <ComboBoxItem Content="Milk"></ComboBoxItem>
-            <ComboBoxItem Content="Iced Tea"></ComboBoxItem>
-            <ComboBoxItem Content="Mango Shake"></ComboBoxItem>
-        </ComboBox>
-        <Label Content="Rp.100.000" HorizontalAlignment="Left" Height="49" Margin="20,42,0,0" Background="White" FontSize="30" Padding="8,3,0,3" VerticalAlignment="Top" Width="293"/>
-        <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" Margin="20,156,20,69" SelectionChanged="DataGrid_SelectionChanged"/>
+        <TextBlock Text="Transaction" Foreground="WhiteSmoke" FontSize="28" FontWeight="Medium"/>
+        <StackPanel Margin="15,50,0,5">
+            <Border Width="250" Height="50"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Background="WhiteSmoke"
+                    >
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="10,0,0,0">
+                    <Label Content="$" FontSize="34" HorizontalAlignment="Center" FontWeight="Medium" VerticalAlignment="Center" Padding="2"/>
+                    <Label x:Name="TotalAmount" FontWeight="Medium" FontSize="34" Padding="2"/>
+                </StackPanel>
+            </Border>
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,10">
+                <ComboBox x:Name="SelectedProduct" 
+                  ItemsSource="{Binding Products.DefaultView}" 
+                  DisplayMemberPath="Product_name" 
+                  HorizontalAlignment="Left" VerticalAlignment="Top" Width="194" Height="28" />
+                <TextBox x:Name="NumberTextBox" Margin="5,0,5,0" PreviewTextInput="NumberValidationTextBox"
+                    HorizontalAlignment="Left" Height="28" FontSize="18" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="33"/>
+                <Label Content="Adet" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <Button Content="Add item" HorizontalAlignment="Left" VerticalAlignment="Center" Width="94" Style="{StaticResource PrimaryButton}" Click="Button_Click" />
+        
+            </StackPanel>
+
+            <StackPanel>
+                <DataGrid x:Name="ListTransaction" 
+                          Height="300"
+                          HorizontalAlignment="Left"
+                          Width="800"
+                          CanUserAddRows="False"
+                          Background="WhiteSmoke">
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="Action" Width="50">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button Command="{Binding Path=DataContext.DeleteDataBtnCommand, 
+                                        RelativeSource= {RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}"
+                                                CommandParameter="{Binding Product_no}"
+                                                Style="{StaticResource DangerButton}" Height="20" Margin="0,0,0,0" Padding="0,0,0,0">
+                                            <fa:FontAwesome Icon="Trash" FontSize="15"/>
+                                        </Button>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+
+                </DataGrid>
+            </StackPanel>
+                
+            <Button Margin="0, 25,50, 0" Content="Payment" HorizontalAlignment="Right" Height="45" Style="{StaticResource SuccessButton}" VerticalAlignment="Top" Width="122"/>
+        </StackPanel>
 
 
     </Grid>

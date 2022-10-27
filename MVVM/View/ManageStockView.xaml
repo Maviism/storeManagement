@@ -4,11 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:storeManagement.MVVM.View"
-             mc:Ignorable="d" 
-             d:DesignHeight="400" d:DesignWidth="600"
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
+             mc:Ignorable="d" Height="550" Width="940"
              >
     <StackPanel>
-        <Label Content="Manage Stock" Foreground="White" FontSize="28"/>
+        <Label Content="Manage Stock" Foreground="White" FontSize="28" />
         <Grid Margin="5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
@@ -22,21 +22,22 @@
                         <ColumnDefinition Width="auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    
+
                     <Button Grid.Column="0" Style="{StaticResource SuccessButton}" Content="Add Item" Margin="3" Click="input_modal"/>
                     <Button Grid.Column="1" Style="{StaticResource WarningButton}" 
                             Content="Update Stock" Margin="3" IsEnabled="False"/>
+
                     <StackPanel Grid.Column="2" HorizontalAlignment="Right" Margin="0,0,50,0">
-                        
+
                         <Button Width="120"
                                 Style="{StaticResource PrimaryButton}" 
                             Content="Refresh Data" Margin="3"
                             Command="{Binding RefreshDataCommand}"/>
                     </StackPanel>
                 </Grid>
-                
+
             </Border>
-            
+
             <Border Grid.Row="1" Margin="3,5,0,0">
                 <DataGrid x:Name="Products"
                           Style="{StaticResource DataGridStyle}"
@@ -72,8 +73,8 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                    </DataGrid.Columns>    
-                </DataGrid>        
+                    </DataGrid.Columns>
+                </DataGrid>
             </Border>
         </Grid>
     </StackPanel>

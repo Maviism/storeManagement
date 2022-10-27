@@ -43,6 +43,7 @@ namespace storeManagement.MVVM.View
             SqlCommand cmd = new SqlCommand("SELECT * FROM Products WHERE Product_no = " + ProductNo, conn);
 
             conn.Open();
+
             SqlDataReader reader = cmd.ExecuteReader();
 
             while(reader.Read())
@@ -64,6 +65,8 @@ namespace storeManagement.MVVM.View
 
         }
 
+        //TODO rename button function to easy understanding
+        //If product number changable let add productid for foreign key
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             conn.Open();

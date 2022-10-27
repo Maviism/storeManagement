@@ -4,6 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:storeManagement.MVVM.View"
+        xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
         mc:Ignorable="d"
         Title="Add new item" Height="450" Width="500"
         WindowStartupLocation="CenterScreen"
@@ -41,8 +43,18 @@
             </StackPanel>
 
             <WrapPanel Grid.Row="2" HorizontalAlignment="Center" Margin="0,15,0,0">
-                <Button Content="Cancel" Style="{StaticResource DangerButton}" IsCancel="True" Margin="0,0,15,0"/>
-                <Button Content="Add item" Style="{StaticResource SuccessButton}" Click="Button_Click"/>
+                <Button Style="{StaticResource DangerButton}" IsCancel="True" Margin="0,0,15,0" >
+                    <StackPanel Orientation="Horizontal">
+                        <fa:FontAwesome Icon="Close" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        <Label Content="Cancel" Foreground="WhiteSmoke"/>
+                    </StackPanel>
+                </Button>
+                <Button Style="{StaticResource SuccessButton}" Click="Button_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <fa:FontAwesome Icon="PlusCircle" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        <Label Content="Add item" Foreground="WhiteSmoke"/>
+                    </StackPanel>
+                </Button>
             </WrapPanel>
         </Grid>
     </Border>

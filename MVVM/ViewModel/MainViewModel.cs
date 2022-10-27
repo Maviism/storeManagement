@@ -37,7 +37,7 @@ namespace storeManagement.MVVM.ViewModel
             TransactionVM = new TransactionViewModel();
             ManageStockVM = new ManageStockViewModel();
 
-            CurrentView = ManageStockVM;
+            CurrentView = TransactionVM;
 
             HomeViewCommand = new RelayCommand(o =>
             {
