@@ -60,7 +60,7 @@
                 </DataGrid>
             </StackPanel>
                 
-            <Button Margin="0, 25,50, 0" Content="Payment" HorizontalAlignment="Right" Height="45" Style="{StaticResource SuccessButton}" VerticalAlignment="Top" Width="122"/>
+            <Button Click="PaymentBtn_Click" Margin="0, 25,50, 0" Content="Payment" HorizontalAlignment="Right" Height="45" Style="{StaticResource SuccessButton}" VerticalAlignment="Top" Width="122"/>
         </StackPanel>
 
 

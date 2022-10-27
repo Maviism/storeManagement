@@ -7,20 +7,27 @@
 );
 
 DROP TABLE Transactions
+DROP TABLE Detail_transaction
+
+SELECT TOP 1 * FROM Transactions ORDER BY Transaction_id DESC
 
 CREATE TABLE Transactions(
-	Transaction_id INT IDENTITY(1,1) PRIMARY KEY,
+	Transaction_id INT PRIMARY KEY,
 	Total_price DECIMAL(15,2),
 	Created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
+
+
 CREATE TABLE Detail_transaction(
-	Id INT PRIMARY KEY,
+	Id INT PRIMARY KEY IDENTITY(1,1),
 	Transaction_id INT FOREIGN KEY REFERENCES Transactions(Transaction_id),
-	Product_id INT FOREIGN KEY REFERENCES Products(Product_id),
+	Product_name VARCHAR(55),
 	Quantity INT,
 	Total_price DECIMAL(15,2)
 );
+
+--TODO make trigger when insert detail_transaction then update stock in product
 
 insert into Products (Product_no, Product_name, Price, Quantity) values (1, 'Vallow', 77, 59);
 insert into Products (Product_no, Product_name, Price, Quantity) values (2, 'Slewcock', 98, 96);
