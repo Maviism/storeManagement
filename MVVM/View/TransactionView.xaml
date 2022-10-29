@@ -5,12 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:storeManagement.MVVM.View"
              xmlns:fa="http://schemas.fontawesome.io/icons/"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="900"
+             mc:Ignorable="d"
              >
-    <Grid>
-        <TextBlock Text="Transaction" Foreground="WhiteSmoke" FontSize="28" FontWeight="Medium"/>
-        <StackPanel Margin="15,50,0,5">
+    <StackPanel>
+        <Label Content="Transaction" Foreground="WhiteSmoke" FontSize="28" FontWeight="Medium"/>
+        <StackPanel Margin="15,10,0,5">
             <Border Width="250" Height="50"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
@@ -30,7 +29,7 @@
                     HorizontalAlignment="Left" Height="28" FontSize="18" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="33"/>
                 <Label Content="Adet" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                 <Button Content="Add item" HorizontalAlignment="Left" VerticalAlignment="Center" Width="94" Style="{StaticResource PrimaryButton}" Click="Button_Click" />
-        
+
             </StackPanel>
 
             <StackPanel>
@@ -59,10 +58,22 @@
 
                 </DataGrid>
             </StackPanel>
-                
-            <Button Click="PaymentBtn_Click" Margin="0, 25,50, 0" Content="Payment" HorizontalAlignment="Right" Height="45" Style="{StaticResource SuccessButton}" VerticalAlignment="Top" Width="122"/>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0, 10, 5,0">
+                <StackPanel Orientation="Horizontal" Margin="0,0,35,0">
+                    <StackPanel VerticalAlignment="Center">
+                        <Label Content="uang" FontSize="20"/>
+                        <Label Content="kembalian" FontSize="20"/>
+                    </StackPanel>
+                    <StackPanel>
+                        <TextBox Width="150" Height="35" Margin="5"/>
+                        <TextBox Width="150" IsEnabled="False" Height="35" Margin="5"/>
+                    </StackPanel>
+                </StackPanel>
+                <Button Click="PaymentBtn_Click" Margin="0, 25,50, 0" Content="Payment" HorizontalAlignment="Right" Height="45" Style="{StaticResource SuccessButton}" VerticalAlignment="Top" Width="122"/>
+            </StackPanel>
         </StackPanel>
 
 
-    </Grid>
+    </StackPanel>
 </UserControl>

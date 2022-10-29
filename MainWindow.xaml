@@ -4,20 +4,20 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:storeManagement"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
         xmlns:viewModel="clr-namespace:storeManagement.MVVM.ViewModel"
         mc:Ignorable="d"
-        Height="680" Width="1100"
-        WindowStyle="None"
         ResizeMode="NoResize"
+        WindowState="Maximized"
+        Title="Store Management System"
         Background="Transparent"
-        WindowStartupLocation="CenterScreen"
-        AllowsTransparency="True">
+        WindowStartupLocation="CenterScreen">
 
     <Window.DataContext>
         <viewModel:MainViewModel/>
     </Window.DataContext>
     
-    <Border Background="#DF6E21">
+    <Border Background="#DF6E21" Padding="0,0,0,15">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200"/>
@@ -40,17 +40,17 @@
                 <StackPanel >
 
                     <RadioButton Content="Home"
+                                 IsChecked="True" 
                                  Style="{StaticResource MenuButtonTheme}"
-                        
                                  Command="{Binding HomeViewCommand}"/>
 
                     <RadioButton Content="Transaction"
-                                 Style="{StaticResource MenuButtonTheme}"
+                                 Style="{StaticResource MenuButtonTheme1}"
+                                 
                                  Command="{Binding TransactionViewCommand}"/>
 
                     <RadioButton Content="Manage stock"
-                                 Style="{StaticResource MenuButtonTheme}"
-                                 IsChecked="True" 
+                                 Style="{StaticResource MenuButtonTheme2}"
                                  Command="{Binding ManageStockViewCommand}"/>
                 </StackPanel>
             </Border>

@@ -5,10 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:storeManagement.MVVM.View"
              xmlns:fa="http://schemas.fontawesome.io/icons/"
-             mc:Ignorable="d" Height="550" Width="940"
+             mc:Ignorable="d"
              >
     <StackPanel>
-        <Label Content="Manage Stock" Foreground="White" FontSize="28" />
+        <Label Content="Manage Stock" Foreground="WhiteSmoke" FontWeight="SemiBold" FontSize="28" />
         <Grid Margin="5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
@@ -23,9 +23,20 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Button Grid.Column="0" Style="{StaticResource SuccessButton}" Content="Add Item" Margin="3" Click="input_modal"/>
+                    <Button Grid.Column="0" Style="{StaticResource SuccessButton}" Margin="3" Command="{Binding AddItemBtnCommand}">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:FontAwesome Icon="Plus" VerticalAlignment="Center" Margin="0,4,0,0" FontSize="20"/>
+                            <Label Content="Add item" Foreground="WhiteSmoke"/>
+                        </StackPanel>
+                    </Button>
                     <Button Grid.Column="1" Style="{StaticResource WarningButton}" 
-                            Content="Update Stock" Margin="3" IsEnabled="False"/>
+                            Margin="3" IsEnabled="False">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:FontAwesome Icon="Pencil" VerticalAlignment="Center"
+                                            FontSize="20"/>
+                            <Label Content="Update stock" FontWeight="20" Foreground="WhiteSmoke"/>
+                        </StackPanel>                        
+                    </Button>
 
                     <StackPanel Grid.Column="2" HorizontalAlignment="Right" Margin="0,0,50,0">
 

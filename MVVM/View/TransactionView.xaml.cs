@@ -98,7 +98,6 @@ namespace storeManagement.MVVM.View
         private int convertInt(IDataRecord dataRecord)
         {
             int Transaction_no = Convert.ToInt32(dataRecord[0]);
-            Trace.WriteLine(Transaction_no);
             return Transaction_no;
         }
 

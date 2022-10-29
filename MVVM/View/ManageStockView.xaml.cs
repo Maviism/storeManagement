@@ -28,13 +28,6 @@ namespace storeManagement.MVVM.View
             InitializeComponent();
         }
 
-        private void input_modal(object sender, RoutedEventArgs e)
-        {
-            InputModalView inputModal = new InputModalView();
-            inputModal.ShowDialog();
-            
-        }
-
 
     }
 }

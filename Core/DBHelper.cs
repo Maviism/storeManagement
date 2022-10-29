@@ -10,11 +10,12 @@ namespace storeManagement.Core
 {
     internal class DBHelper
     {
-        private string _dbSource;
-        private string _dbName;
-
-        SqlConnection conn = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog=DB_testing;Integrated Security = True;");
-
-        
+        //Set Data Source to DB Server name
+        //Set Initial Catalog to DB name
+        public DBHelper()
+        {
+            Connection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog=StoreManagement;Integrated Security = True;");
+        }
+        public SqlConnection Connection { get; set; }
     }
 }

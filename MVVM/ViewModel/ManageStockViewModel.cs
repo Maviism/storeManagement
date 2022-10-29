@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using storeManagement.Core;
+using storeManagement.MVVM.Model;
 using storeManagement.MVVM.View;
 
 namespace storeManagement.MVVM.ViewModel
@@ -16,10 +17,9 @@ namespace storeManagement.MVVM.ViewModel
     {
 
         public RelayCommand ButtonTest { get; set; }
+        public RelayCommand AddItemBtnCommand { get; set; }
         public RelayCommand DeleteDataBtnCommand { get; set; }
-
         public RelayCommand UpdateDataBtnCommand { get; set; }
-
         public RelayCommand RefreshDataCommand { get; set; }
 
         private DataTable _products;
@@ -32,60 +32,43 @@ namespace storeManagement.MVVM.ViewModel
             }
         }
 
+        ProductModel product = new ProductModel();
+
         SqlConnection conn = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog=StoreManagement;Integrated Security = True;");
-
-        public DataTable LoadGrid()
-        {
-            SqlCommand cmd = new SqlCommand("SELECT * FROM Products", conn);
-            DataTable dt = new DataTable();
-            conn.Open();
-            SqlDataReader sdr = cmd.ExecuteReader();
-            dt.Load(sdr);
-            conn.Close();
-            return dt;
-        }
-
-
-        private void DeleteData(object message)
-        {
-            conn.Open();
-            SqlCommand cmd = new SqlCommand("DELETE FROM Products Where Product_no = " + message, conn);
-            try
-            {
-                cmd.ExecuteNonQuery();
-                MessageBox.Show("Success delete");
-                conn.Close();
-                Products = LoadGrid();
-            }
-            catch (SqlException ex)
-            {
-                MessageBox.Show("Not deleted " + ex.Message);
-            }
-            finally
-            {
-                conn.Close();
-            }
-        }
 
         private void UpdateData(object obj)
         {
             string name = obj.ToString();
             UpdateModalView updateModalView = new UpdateModalView(name);
             updateModalView.ShowDialog();
+            Products = product.getAllProduct();
+        }
+
+        private void OpenInputModal()
+        {
+            InputModalView inputModal = new InputModalView();
+            inputModal.ShowDialog();
+            Products = product.getAllProduct();
         }
 
         public ManageStockViewModel()
         {
-            Products = LoadGrid();
+            Products = product.getAllProduct();
 
             RefreshDataCommand = new RelayCommand(o =>
             {
-                Products = LoadGrid();
+                Products = product.getAllProduct();
+            });
+
+            AddItemBtnCommand = new RelayCommand(o =>
+            {
+                OpenInputModal();
             });
 
             DeleteDataBtnCommand = new RelayCommand(o =>
             {
-                DeleteData(o);
+                product.deleteProduct(o);
+                Products = product.getAllProduct();
             });
 
             UpdateDataBtnCommand = new RelayCommand(o =>
