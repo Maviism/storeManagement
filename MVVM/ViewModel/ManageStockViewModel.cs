@@ -10,19 +10,24 @@ using System.Windows.Controls;
 using storeManagement.Core;
 using storeManagement.MVVM.Model;
 using storeManagement.MVVM.View;
+using storeManagement.MVVM.View.Modal;
 
 namespace storeManagement.MVVM.ViewModel
 {
     internal class ManageStockViewModel : ObservableObject
     {
 
+        #region All of RelayCommand
         public RelayCommand ButtonTest { get; set; }
         public RelayCommand AddItemBtnCommand { get; set; }
         public RelayCommand DeleteDataBtnCommand { get; set; }
         public RelayCommand UpdateDataBtnCommand { get; set; }
+        public RelayCommand UpdateStockProductCommand { get; set; }
         public RelayCommand RefreshDataCommand { get; set; }
+        #endregion
 
         private DataTable _products;
+        ProductModel product = new ProductModel();
         public DataTable Products 
         { 
             get { return _products; } 
@@ -31,10 +36,6 @@ namespace storeManagement.MVVM.ViewModel
                 OnPropertyChanged();
             }
         }
-
-        ProductModel product = new ProductModel();
-
-        SqlConnection conn = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog=StoreManagement;Integrated Security = True;");
 
         private void UpdateData(object obj)
         {
@@ -76,9 +77,11 @@ namespace storeManagement.MVVM.ViewModel
                 UpdateData(o);
             });
 
-            ButtonTest = new RelayCommand(o =>
+            UpdateStockProductCommand = new RelayCommand(o =>
             {
-                MessageBox.Show("Hello");
+                UpdateStockModal updateStock = new UpdateStockModal();
+                updateStock.ShowDialog();
+                Products = product.getAllProduct();
             });
 
 

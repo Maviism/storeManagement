@@ -23,13 +23,13 @@ namespace storeManagement.MVVM.ViewModel
         }
         public decimal TotalAmount { get; set; }
 
-        SqlConnection conn = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog=StoreManagement;Integrated Security = True;");
+        SqlConnection conn = new DBHelper().Connection;
         public int getTotalTransaction()
         {
             int totalTransaction = 0;
             //SELECT * FROM Transactions WHERE CONVERT(VARCHAR(25), Created_at,126) LIKE '%2022-10-27%'
-            string date = DateTime.Today.ToString("yyyy-MM-dd");
 
+            string date = DateTime.Today.ToString("yyyy-MM-dd");
             string query = "SELECT * FROM Transactions WHERE CONVERT(VARCHAR(25), Created_at,126) LIKE '%" + date +"%' ";//Like date now
             SqlCommand cmd = new SqlCommand(query, conn);
             conn.Open();

@@ -11,6 +11,7 @@
         WindowState="Maximized"
         Title="Store Management System"
         Background="Transparent"
+        Icon="sms.ico"
         WindowStartupLocation="CenterScreen">
 
     <Window.DataContext>

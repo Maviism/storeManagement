@@ -13,7 +13,7 @@
         Background="Transparent">
     
     <Border Background="#DF6E21">
-        <Grid>
+        <Grid VerticalAlignment="Center">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
@@ -21,24 +21,24 @@
             </Grid.RowDefinitions>
 
             <Border>
-                <Label Content="Add new item" HorizontalAlignment="Center" FontSize="20" FontWeight="SemiBold"/>
+                <TextBlock Text="Add new item" Margin="0,10,0,0" Foreground="WhiteSmoke" HorizontalAlignment="Center" FontSize="20" FontWeight="SemiBold"/>
             </Border>
 
             <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="15,5,15,0">
-                <StackPanel  HorizontalAlignment="Center">
-                    <Label Content="Product No"/>
-                    <Label Content="Product Name"/>
-                    <Label Content="Quantity"/>
-                    <Label Content="Price"/>
-                    <Label Content="Description"/>
+                <StackPanel  HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Text="Product No" Style="{StaticResource LabelStyle}"/>
+                    <TextBlock Text="Product Name" Style="{StaticResource LabelStyle}"/>
+                    <TextBlock Text="Quantity" Style="{StaticResource LabelStyle}"/>
+                    <TextBlock Text="Price" Style="{StaticResource LabelStyle}"/>
+                    <TextBlock Text="Description" Style="{StaticResource LabelStyle}"/>
                         
                 </StackPanel>
                 <StackPanel Margin="0,3,0,0">
-                    <TextBox x:Name="Product_noInput" Width="250" Height="25" Padding="5,3,0,3" VerticalAlignment="Center"/>
-                    <TextBox x:Name="Product_nameInput" Width="250" Height="25" Padding="5,3,0,3" VerticalAlignment="Center"/>
-                    <TextBox x:Name="Product_qtyInput" Width="250" Height="25" Padding="5,3,0,3" VerticalAlignment="Center"/>
-                    <TextBox x:Name="Product_priceInput" Width="250" Height="25" Padding="5,3,0,3" VerticalAlignment="Center"/>
-                    <TextBox x:Name="Product_descInput" Width="250" Height="25" Padding="5,3,0,3" VerticalAlignment="Center"/>
+                    <TextBox x:Name="Product_noInput" Style="{StaticResource TextBoxStyle}"/>
+                    <TextBox x:Name="Product_nameInput" Style="{StaticResource TextBoxStyle}"/>
+                    <TextBox x:Name="Product_qtyInput" Style="{StaticResource TextBoxStyle}"/>
+                    <TextBox x:Name="Product_priceInput" Style="{StaticResource TextBoxStyle}"/>
+                    <TextBox x:Name="Product_descInput" Style="{StaticResource TextBoxStyle}"/>
                 </StackPanel>
             </StackPanel>
 
@@ -51,8 +51,8 @@
                 </Button>
                 <Button Style="{StaticResource SuccessButton}" Click="Button_Click">
                     <StackPanel Orientation="Horizontal">
-                        <fa:FontAwesome Icon="PlusCircle" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                        <Label Content="Add item" Foreground="WhiteSmoke"/>
+                        <fa:FontAwesome Icon="Check" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        <TextBlock Text="Add item" Foreground="WhiteSmoke"/>
                     </StackPanel>
                 </Button>
             </WrapPanel>

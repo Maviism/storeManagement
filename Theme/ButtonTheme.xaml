@@ -38,11 +38,21 @@
     </Style>
 
     <Style TargetType="Button"
-           x:Key="WarningButton" BasedOn="{StaticResource PrimaryButton}">
+           x:Key="InfoButton" BasedOn="{StaticResource PrimaryButton}">
         <Setter Property="Background" Value="#1ec8b7" />
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="#1ab3a3"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
+    <Style TargetType="Button"
+           x:Key="WarningButton" BasedOn="{StaticResource PrimaryButton}">
+        <Setter Property="Background" Value="#F9C700" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#D6A600"/>
             </Trigger>
         </Style.Triggers>
     </Style>

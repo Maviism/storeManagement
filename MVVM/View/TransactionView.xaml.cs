@@ -17,6 +17,7 @@ using System.Windows.Shapes;
 using storeManagement.MVVM.Model;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
+using storeManagement.Core;
 
 namespace storeManagement.MVVM.View
 {
@@ -37,8 +38,7 @@ namespace storeManagement.MVVM.View
             getLastTransactionId();
         }
 
-        SqlConnection conn = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog=StoreManagement;Integrated Security = True;");
-        string queryString = "SELECT * FROM Products WHERE Product_name = '";
+        SqlConnection conn = new DBHelper().Connection;
 
         //TODO moving all method to viewModel
         public void refreshData()
@@ -56,11 +56,12 @@ namespace storeManagement.MVVM.View
 
         private void addListTransaction(string name)
         {
+            string queryString = "SELECT * FROM Products WHERE Product_name = '";
             SqlCommand command = new SqlCommand(queryString + name + "'", conn);
             conn.Open();
 
             SqlDataReader reader = command.ExecuteReader(); 
-            while(reader.Read()) // is possible just get single data without looping?
+            while(reader.Read()) // is it possible just get single data without looping?
             {
                 ReadSingleRow((IDataRecord)reader);                
             }
@@ -136,7 +137,6 @@ namespace storeManagement.MVVM.View
             _totalAmount = 000;
             refreshData();
         }
-
 
         public void insertTransactionToDB(int transaction_id, decimal price)
         {

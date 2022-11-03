@@ -8,7 +8,7 @@
              mc:Ignorable="d"
              >
     <StackPanel>
-        <Label Content="Manage Stock" Foreground="WhiteSmoke" FontWeight="SemiBold" FontSize="28" />
+        <TextBlock Text="Manage Stock" Margin="5,10,0,10" Foreground="WhiteSmoke" FontWeight="SemiBold" FontSize="28" />
         <Grid Margin="5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
@@ -26,24 +26,28 @@
                     <Button Grid.Column="0" Style="{StaticResource SuccessButton}" Margin="3" Command="{Binding AddItemBtnCommand}">
                         <StackPanel Orientation="Horizontal">
                             <fa:FontAwesome Icon="Plus" VerticalAlignment="Center" Margin="0,4,0,0" FontSize="20"/>
-                            <Label Content="Add item" Foreground="WhiteSmoke"/>
+                            <TextBlock Text="Add item" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="3,0,0,0" Foreground="WhiteSmoke"/>
                         </StackPanel>
                     </Button>
                     <Button Grid.Column="1" Style="{StaticResource WarningButton}" 
-                            Margin="3" IsEnabled="False">
+                            Margin="3" Command="{Binding UpdateStockProductCommand}">
                         <StackPanel Orientation="Horizontal">
                             <fa:FontAwesome Icon="Pencil" VerticalAlignment="Center"
                                             FontSize="20"/>
-                            <Label Content="Update stock" FontWeight="20" Foreground="WhiteSmoke"/>
+                            <TextBlock Text="Update stock" VerticalAlignment="Center" Margin="3,0,0,0" Foreground="WhiteSmoke"/>
                         </StackPanel>                        
                     </Button>
 
                     <StackPanel Grid.Column="2" HorizontalAlignment="Right" Margin="0,0,50,0">
 
-                        <Button Width="120"
-                                Style="{StaticResource PrimaryButton}" 
-                            Content="Refresh Data" Margin="3"
-                            Command="{Binding RefreshDataCommand}"/>
+                        <Button Style="{StaticResource PrimaryButton}" 
+                                Margin="0,0,200,0"
+                            Command="{Binding RefreshDataCommand}">
+                            <StackPanel Orientation="Horizontal">
+                                <fa:FontAwesome Icon="Refresh" VerticalAlignment="Center" FontSize="20"/>
+                                <TextBlock Text="Refresh data" Foreground="WhiteSmoke"/>
+                            </StackPanel>
+                        </Button>
                     </StackPanel>
                 </Grid>
 
@@ -54,8 +58,10 @@
                           Style="{StaticResource DataGridStyle}"
                           ItemsSource="{Binding Products.DefaultView}"
                           Width="800" Height="400"
-                          ColumnWidth="*">
-                    <DataGrid.Columns >
+                          
+                          ColumnWidth="*"
+                          RowStyle="{StaticResource RowStyle}">
+                    <DataGrid.Columns>
                         <DataGridTextColumn Header="No" Width="30"/>
                         <DataGridTextColumn Header="Product No" 
                                             Binding="{Binding Product_no}" Width="100"/>
@@ -65,21 +71,37 @@
                                             Width="220"/>
                         <DataGridTextColumn Header="Quantity" 
                                             Binding="{Binding Quantity}"
-                                            Width="80"/>
-                        <DataGridTextColumn Header="Price" 
-                                            Binding="{Binding Price}"
-                                            Width="100"/>
+                                            Width="120"/>
+                        <DataGridTemplateColumn Header="Price">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="$"/>
+                                        <TextBlock Text="{Binding Price}" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                         <DataGridTemplateColumn Header="Action" Width="170">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
+                                        <Button Command="{Binding Path=DataContext.UpdateStockProductCommand, RelativeSource= {RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}"
+                                                CommandParameter="{Binding Product_no}"
+                                                Style="{StaticResource InfoButton}" Margin="0,1,5,1" Height="25">
+                                            <fa:FontAwesome Icon="CartPlus" FontSize="20"/>
+                                        </Button>
                                         <Button Command="{Binding Path=DataContext.UpdateDataBtnCommand, RelativeSource= {RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}"
                                                 CommandParameter="{Binding Product_no}"
-                                                Style="{StaticResource WarningButton}" Margin="0,0,5,0" Height="20">Update</Button>
+                                                Style="{StaticResource WarningButton}" Margin="0,1,5,1" Height="25">
+                                            <fa:FontAwesome Icon="Pencil" FontSize="20"/>
+                                        </Button>
                                         <Button Command="{Binding Path=DataContext.DeleteDataBtnCommand, 
                                         RelativeSource= {RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}"
                                                 CommandParameter="{Binding Product_no}"
-                                                Style="{StaticResource DangerButton}" Height="20">Delete</Button>
+                                                Style="{StaticResource DangerButton}" Height="25">
+                                            <fa:FontAwesome Icon="Trash" FontSize="20"/>
+                                        </Button>
                                     </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
@@ -87,6 +109,7 @@
                     </DataGrid.Columns>
                 </DataGrid>
             </Border>
+        
         </Grid>
     </StackPanel>
 </UserControl>

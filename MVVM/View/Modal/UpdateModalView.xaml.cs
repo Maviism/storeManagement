@@ -23,9 +23,6 @@ namespace storeManagement.MVVM.View
     public partial class UpdateModalView : Window
     {
         string ProductNo;
-        string ProductName;
-        string Quantity;
-        string Price;
 
         public UpdateModalView(string Id)
         {
@@ -58,10 +55,10 @@ namespace storeManagement.MVVM.View
         public void ShowProduct(IDataRecord dataRecord)
         {
             Trace.WriteLine(String.Format("{0}, {1}", dataRecord[0], dataRecord[1]));
-            Product_noInput.Text = Convert.ToString(dataRecord[0]);
-            Product_nameInput.Text = Convert.ToString(dataRecord[1]);
-            Product_qtyInput.Text = Convert.ToString(dataRecord[2]);
-            Product_priceInput.Text = Convert.ToString(dataRecord[3]);
+            Product_noInput.Text = Convert.ToString(dataRecord[1]);
+            Product_nameInput.Text = Convert.ToString(dataRecord[2]);
+            Product_qtyInput.Text = Convert.ToString(dataRecord[3]);
+            Product_priceInput.Text = Convert.ToString(dataRecord[4]);
 
         }
 
