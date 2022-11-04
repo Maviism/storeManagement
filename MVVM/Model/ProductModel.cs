@@ -13,7 +13,34 @@ namespace storeManagement.MVVM.Model
 {
     internal class ProductModel
     {
-        SqlConnection conn = new DBHelper().Connection;
+
+        private int _productNo;
+        private string _productName;
+        private decimal _price;
+        private int _qty;
+
+        public int ProductNo
+        {
+            get { return _productNo; }
+            set { _productNo = value; }
+        }
+        public string ProductName 
+        { 
+            get { return _productName; }
+            set { _productName = value; }
+        }
+        public decimal Price 
+        {
+            get { return _price; }
+            set { _price = value; } 
+        }
+        public int Qty
+        {
+            get { return _qty; }
+            set { _qty = value; }
+        }
+
+        private SqlConnection conn = new DBHelper().Connection;
 
         public DataTable getAllProduct()
         {

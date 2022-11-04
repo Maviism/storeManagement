@@ -91,7 +91,7 @@
                                 VerticalAlignment="Stretch" 
                               HorizontalAlignment="Stretch"
                               Background="{TemplateBinding Background}">
-                                <fa:FontAwesome Margin="10,0,0,0" Icon="Dollar" FontSize="28" VerticalAlignment="Center"/>
+                                <fa:FontAwesome Margin="14,0,10,0" Icon="Dollar" FontSize="28" VerticalAlignment="Center"/>
                                 <Label Content="{TemplateBinding Property=Content}"
                                        Foreground="WhiteSmoke"
                                        VerticalAlignment="Center"
@@ -116,7 +116,7 @@
                         <StackPanel VerticalAlignment="Center" 
                               HorizontalAlignment="Stretch"
                               Background="{TemplateBinding Background}" Orientation="Horizontal">
-                            <fa:FontAwesome Margin="10,0,0,0" Icon="Dropbox" FontSize="28" VerticalAlignment="Center"/>
+                            <fa:FontAwesome Margin="10,0,3,0" Icon="Dropbox" FontSize="28" VerticalAlignment="Center"/>
                             <Label Foreground="WhiteSmoke" Content="{TemplateBinding Property=Content}"
                                        VerticalAlignment="Center"
                                        />
@@ -142,7 +142,7 @@
                                 VerticalAlignment="Stretch" 
                               HorizontalAlignment="Stretch"
                               Background="{TemplateBinding Background}">
-                                <fa:FontAwesome Margin="10,0,5,0" Icon="Dropbox" FontSize="28" VerticalAlignment="Center"/>
+                                <fa:FontAwesome Margin="10,0,3,0" Icon="Dropbox" FontSize="28" VerticalAlignment="Center"/>
                                 <Label Content="{TemplateBinding Property=Content}"
                                        Foreground="WhiteSmoke"
                                        VerticalAlignment="Center"

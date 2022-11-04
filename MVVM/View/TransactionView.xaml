@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:storeManagement.MVVM.View"
              xmlns:fa="http://schemas.fontawesome.io/icons/"
              mc:Ignorable="d"
+             Width="850"
              >
     <StackPanel>
         <Label Content="Transaction" Foreground="WhiteSmoke" FontSize="28" FontWeight="Medium"/>
@@ -17,24 +18,27 @@
                     >
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="10,0,0,0">
                     <Label Content="$" FontSize="34" HorizontalAlignment="Center" FontWeight="Medium" VerticalAlignment="Center" Padding="2"/>
-                    <Label x:Name="TotalAmount" FontWeight="Medium" FontSize="34" Padding="2"/>
+                    <Label x:Name="TotalAmount" Content="{Binding TotalPriceTransaction}" FontWeight="Medium" FontSize="34" Padding="2"/>
                 </StackPanel>
             </Border>
             <StackPanel Orientation="Horizontal" Margin="0,10,0,10">
                 <ComboBox x:Name="SelectedProduct" 
-                  ItemsSource="{Binding Products.DefaultView}" 
-                  DisplayMemberPath="Product_name" 
+                  ItemsSource="{Binding Path=ProductList}"
+                  SelectedItem="{Binding Path=SProduct}"
+                  DisplayMemberPath="ProductName" 
                   HorizontalAlignment="Left" VerticalAlignment="Top" Width="194" Height="28" />
                 <TextBox x:Name="NumberTextBox" Margin="5,0,5,0" PreviewTextInput="NumberValidationTextBox"
-                    HorizontalAlignment="Left" Height="28" FontSize="18" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="33"/>
+                    HorizontalAlignment="Left" Height="28" FontSize="18" TextWrapping="Wrap" Text="{Binding ProductQty}" VerticalAlignment="Top" Width="33"/>
                 <Label Content="Adet" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                <Button Content="Add item" HorizontalAlignment="Left" VerticalAlignment="Center" Width="94" Style="{StaticResource PrimaryButton}"  />
+                <Button Content="Add item" HorizontalAlignment="Left" VerticalAlignment="Center" Width="94" Style="{StaticResource PrimaryButton}"  Command="{Binding AddItemBtnCommand}"/>
 
             </StackPanel>
 
             <StackPanel>
-                <DataGrid x:Name="ListTransaction" 
+                <DataGrid x:Name="ListTransaction"
+                          ItemsSource="{Binding TransactionList}"
                           Height="300"
+                          AutoGenerateColumns="False"
                           HorizontalAlignment="Left"
                           Width="800"
                           CanUserAddRows="False"
@@ -44,9 +48,9 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-                                        <Button Command="{Binding Path=DataContext.DeleteDataBtnCommand, 
+                                        <Button Command="{Binding Path=DataContext.DeleteItemBtnCommand, 
                                         RelativeSource= {RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}"
-                                                CommandParameter="{Binding Product_no}"
+                                                CommandParameter="{Binding NoIndex}"
                                                 Style="{StaticResource DangerButton}" Height="20" Margin="0,0,0,0" Padding="0,0,0,0">
                                             <fa:FontAwesome Icon="Trash" FontSize="15"/>
                                         </Button>
@@ -54,6 +58,14 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
+                        <DataGridTextColumn Header="Product No" Width="100"
+                                            Binding="{Binding ProductNo}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Product Name" Width="250"
+                                            Binding="{Binding Name}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Qty" Width="100" 
+                                            Binding="{Binding Quantity}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Total Price" Width="120" 
+                                            Binding="{Binding TotalPrice}" IsReadOnly="True"/>
                     </DataGrid.Columns>
 
                 </DataGrid>
@@ -62,15 +74,15 @@
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0, 10, 5,0">
                 <StackPanel Orientation="Horizontal" Margin="0,0,35,0">
                     <StackPanel VerticalAlignment="Center">
-                        <Label Content="uang" FontSize="20"/>
-                        <Label Content="kembalian" FontSize="20"/>
+                        <TextBlock Text="Cash" Margin="0,0,0,15" FontSize="20"/>
+                        <TextBlock Text="Change" FontSize="20"/>
                     </StackPanel>
                     <StackPanel>
-                        <TextBox Width="150" Height="35" Margin="5"/>
-                        <TextBox Width="150" IsEnabled="False" Height="35" Margin="5"/>
+                        <TextBox Width="150" Text="{Binding Cash, UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox" Height="35" Margin="5"/>
+                        <TextBox Width="150" Text="{Binding Change}" IsEnabled="False" Height="35" Margin="5"/>
                     </StackPanel>
                 </StackPanel>
-                <Button Click="PaymentBtn_Click" Margin="0, 25,50, 0" Content="Payment" HorizontalAlignment="Right" Height="45" Style="{StaticResource SuccessButton}" VerticalAlignment="Top" Width="122"/>
+                <Button Margin="0, 25,50, 0" Content="Payment" Command="{Binding PaymentBtnCommand}" HorizontalAlignment="Right" Height="45" Style="{StaticResource SuccessButton}" VerticalAlignment="Top" Width="122"/>
             </StackPanel>
         </StackPanel>
 

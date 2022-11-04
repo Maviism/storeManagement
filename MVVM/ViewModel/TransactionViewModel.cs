@@ -8,74 +8,161 @@ using System.Threading.Tasks;
 using storeManagement.Core;
 using System.Windows;
 using storeManagement.MVVM.Model;
+using System.Diagnostics;
+using System.Collections.ObjectModel;
+using System.Windows.Controls;
 
 namespace storeManagement.MVVM.ViewModel
 {
     internal class TransactionViewModel : ObservableObject
     {
+
+        #region Variable Declare
+        private decimal _cash;
+        private decimal _change;
+        private int _productQty = 1;
+        private decimal _totalpriceTransaction;
+        private int i = 0; //indexing new SProduct(_transactionlis) for easy to remove
+        private ProductModel _sproduct;
+        private ObservableCollection<ProductModel> _productList;
+        private ObservableCollection<TransactionModel> _transactionList;
+
         public RelayCommand AddItemBtnCommand { get; set; }
-
-        
-
-        private DataTable _products;
-
-        public DataTable Transaction;
-        public DataTable Products
+        public RelayCommand DeleteItemBtnCommand { get; set; }
+        public RelayCommand PaymentBtnCommand { get; set; }
+        public int ProductQty
         {
-            get { return _products; }
-            set
-            {
-                _products = value;
-                OnPropertyChanged();
-            }
+            get { return _productQty; }
+            set { _productQty = value; OnPropertyChanged(); }
+        }
+        public decimal TotalPriceTransaction 
+        {
+            get { return _totalpriceTransaction; } 
+            set { _totalpriceTransaction = value;
+                Change = Cash;
+                OnPropertyChanged(); } 
+        }
+        public decimal Cash
+        {
+            get { return _cash; }
+            set { _cash = value;
+                Change = _cash;
+                OnPropertyChanged(); }
+        }
+        public decimal Change
+        {
+            get { return _change - _totalpriceTransaction; }
+            set { _change = value; OnPropertyChanged(); }
         }
 
-        private string selectedItem;
-        public string SelectedItem
+        public ProductModel SProduct
         {
-            get
-            {
-                return selectedItem;
-            }
-            set
-            {
-                selectedItem = value;
-                OnPropertyChanged();
-            }
+            get { return _sproduct; }
+            set { _sproduct = value; OnPropertyChanged(); }
         }
 
-
-
-        public void testMethod()
+        public ObservableCollection<ProductModel> ProductList
         {
-            MessageBox.Show("viewmodel method");
+            get { return _productList; }
+            set { _productList = value; OnPropertyChanged(); }
         }
 
-        SqlConnection conn = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog=StoreManagement;Integrated Security = True;");
-
-        public DataTable LoadGrid()
+        public ObservableCollection<TransactionModel> TransactionList
         {
-            SqlCommand cmd = new SqlCommand("SELECT * FROM Products ORDER BY Product_name ASC", conn);
-            DataTable dt = new DataTable();
-            conn.Open();
-            SqlDataReader sdr = cmd.ExecuteReader();
-            dt.Load(sdr);
-            conn.Close();
-            return dt;
+            get { return _transactionList; }
+            set { _transactionList = value; OnPropertyChanged(); }
         }
 
+        #endregion
         public void addTransation()
         {
         }
 
+        public void convertToCollection()
+        {
+            DataTable products = new ProductModel().getAllProduct();
+            ProductList = new ObservableCollection<ProductModel>();
+            foreach (DataRow row in products.Rows)
+            {
+                var obj = new ProductModel()
+                {
+                    ProductNo = (int)row["Product_no"],
+                    ProductName = (string)row["Product_name"],
+                    Price = (decimal)row["Price"],
+                    Qty = (int)row["Quantity"]
+                };
+                ProductList.Add(obj);
+            }    
+        }
+
+        
+        private void refreshAllData()
+        {
+            TotalPriceTransaction = 0;
+            TransactionList.Clear();
+            ProductQty = 1;
+            Cash = 0;
+            Change = 0;
+        }
+        
         public TransactionViewModel()
         {
-            Products = LoadGrid();
+            convertToCollection();
+            TotalPriceTransaction = new Decimal(00);
+            TransactionList = new ObservableCollection<TransactionModel>();
+            
 
             AddItemBtnCommand = new RelayCommand(o =>
             {
-                MessageBox.Show(selectedItem);
+                if(SProduct!= null)
+                {
+                    decimal totalPrice = SProduct.Price * ProductQty;
+                    TransactionList.Add(new TransactionModel() 
+                    { 
+                        NoIndex = i,
+                        ProductNo = SProduct.ProductNo,
+                        Name = SProduct.ProductName,
+                        Price = SProduct.Price,
+                        Quantity = ProductQty,
+                        TotalPrice = totalPrice,
+                    });
+                    TotalPriceTransaction += totalPrice;
+                    ProductQty = 1;
+                    i++;
+                }
+                else
+                {
+                    MessageBox.Show("you must select item first");
+                }
             });
+
+            DeleteItemBtnCommand = new RelayCommand(o =>
+            {
+                int index = Convert.ToUInt16(o);
+                TransactionModel model = TransactionList.Where(i => i.NoIndex == index).FirstOrDefault();
+                TotalPriceTransaction -= model.TotalPrice;
+                TransactionList.Remove(model);
+            });
+
+            PaymentBtnCommand = new RelayCommand(o =>
+            {
+                int transactionId = new TransactionModel().getLastTransactionId();
+                if(SProduct != null)
+                {
+                    new TransactionModel().insertTransactionToDB(transactionId,TotalPriceTransaction);
+                    foreach (TransactionModel obj in TransactionList)
+                    {
+                        new DetailTransactionModel().insertDetailTransactionToDB(transactionId, obj.Name, obj.Quantity, obj.TotalPrice);
+                    }
+                    refreshAllData();
+                    MessageBox.Show("Payment successfully");
+                }
+                else
+                {
+                    MessageBox.Show("you must add item first");
+                }
+            });
+
         }
 
 

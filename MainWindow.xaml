@@ -57,7 +57,7 @@
             </Border>
 
             <Border Grid.Column="1" Grid.Row="1" Margin="5,0,10,10" Background="#E7B183" CornerRadius="15" Padding="15,10,10,10">
-                <ContentControl  
+                <ContentControl HorizontalAlignment="Left" 
                                 Content="{Binding CurrentView}"/>
             </Border>
             

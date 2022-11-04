@@ -17,5 +17,7 @@ namespace storeManagement.Core
             Connection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog=StoreManagement;Integrated Security = True;");
         }
         public SqlConnection Connection { get; set; }
+
+        //https://learn.microsoft.com/en-us/dotnet/api/system.data.sqlclient.sqldatareader?view=dotnet-plat-ext-6.0
     }
 }
