@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using LiveChartsCore.SkiaSharpView;
+using LiveChartsCore;
 
 namespace storeManagement.MVVM.View
 {
@@ -23,6 +25,7 @@ namespace storeManagement.MVVM.View
         public HomeView()
         {
             InitializeComponent();
+            
         }
     }
 }

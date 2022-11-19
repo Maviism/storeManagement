@@ -120,6 +120,16 @@ namespace storeManagement.MVVM.Model
             }
         }
 
+        public DataTable getOutOfStockProducts()
+        {
+            SqlCommand cmd = new SqlCommand("SELECT * FROM Products WHERE Quantity < 3", conn);
+            DataTable dt = new DataTable();
+            conn.Open();
+            SqlDataReader sdr = cmd.ExecuteReader();
+            dt.Load(sdr);
+            conn.Close();
+            return dt;
+        }
 
     }
 }

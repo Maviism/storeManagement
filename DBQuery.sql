@@ -9,15 +9,18 @@
 DROP TABLE Transactions
 DROP TABLE Detail_transaction
 
+TRUNCATE TABLE Transactions
+
 SELECT TOP 1 * FROM Transactions ORDER BY Transaction_id DESC
 SELECT COUNT(Transaction_id) FROM Transactions WHERE CONVERT(VARCHAR(25), Created_at,126) LIKE '%2022-10-28%'
+
+SELECT * FROM Transactions WHERE CONVERT(VARCHAR(25), Created_at,126) LIKE '%2022-11-19%' 
 
 CREATE TABLE Transactions(
 	Transaction_id INT PRIMARY KEY,
 	Total_price DECIMAL(15,2),
 	Created_at DATETIME NOT NULL DEFAULT GETDATE()
 );
-
 
 
 CREATE TABLE Detail_transaction(

@@ -52,7 +52,7 @@
                 </Grid>
 
             </Border>
-
+            <!--Datagrid-->
             <Border Grid.Row="1" Margin="3,5,0,0">
                 <DataGrid x:Name="Products"
                           Style="{StaticResource DataGridStyle}"
@@ -109,7 +109,8 @@
                     </DataGrid.Columns>
                 </DataGrid>
             </Border>
-        
+            <!--End DataGrid-->
+            
         </Grid>
     </StackPanel>
 </UserControl>

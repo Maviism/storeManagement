@@ -7,31 +7,33 @@ using System.Text;
 using System.Threading.Tasks;
 using storeManagement.Core;
 using System.Diagnostics;
+using System.Security.RightsManagement;
 
 namespace storeManagement.MVVM.Model
 {
     internal class TransactionModel
     {
+        #region Properties
         SqlConnection conn = new DBHelper().Connection;
         public int NoIndex { get; set; }
         public int ProductNo { get; set; }
         public string Name { get; set; }
         public int Quantity { get; set; }
         public decimal Price { get; set; }
-
         public decimal TotalPrice { get; set; }
+        #endregion
 
+        #region Methods
         public int getLastTransactionId()
         {
             string strQuery = "SELECT TOP 1 * FROM Transactions ORDER BY Transaction_id DESC";
-            int Transaction_no = 1;
+            int Transaction_no = 1; //declaration transaction number; if there is not yet transaction in db
             SqlCommand command = new SqlCommand(strQuery, conn);
             conn.Open();
             SqlDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
                 Transaction_no = convertInt((IDataRecord)reader) + 1;
-                //Transaction_no = reader.GetInt32(0) + 1;
             }
             reader.Close();
             conn.Close();
@@ -45,6 +47,12 @@ namespace storeManagement.MVVM.Model
             return Transaction_no;
         }
 
+        private decimal convertDecimal(IDataRecord dataRecord)
+        {
+            decimal total_price = Convert.ToDecimal(dataRecord[1]);
+            return total_price;
+        }
+
         public void insertTransactionToDB(int transaction_id, decimal price)
         {
             string query = "INSERT INTO Transactions(Transaction_id, Total_price) VALUES (@Transaction_id, @Total_price)";
@@ -56,6 +64,43 @@ namespace storeManagement.MVVM.Model
             conn.Close();
         }
 
+        public int getTotalTransaction(string value)//format yyyy-MM-dd
+        {
+            int totalTransaction = 0;
+
+            string date = value;
+            string query = "SELECT * FROM Transactions WHERE CONVERT(VARCHAR(25), Created_at,126) LIKE '%" + date + "%' ";//Like date now
+            SqlCommand cmd = new SqlCommand(query, conn);
+            conn.Open();
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                totalTransaction++;
+            }
+            reader.Close();
+            conn.Close();
+            return totalTransaction;
+        }
+
+        public decimal getDailyIncome()
+        {
+            decimal totalDailyIncome = 0;
+            string date = DateTime.Today.ToString("yyyy-MM-dd");
+            string strQuery = "SELECT * FROM Transactions WHERE CONVERT(VARCHAR(25), Created_at,126) LIKE '%" + date + "%' ";
+            int Transaction_no = 1; //declaration transaction number; if there is not yet transaction in db
+            SqlCommand command = new SqlCommand(strQuery, conn);
+            conn.Open();
+            SqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                totalDailyIncome += convertDecimal((IDataRecord)reader);
+            }
+            reader.Close();
+            conn.Close();
+
+            return totalDailyIncome;
+        }
+        #endregion 
 
     }
 }

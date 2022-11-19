@@ -13,6 +13,7 @@
                 <ResourceDictionary Source="Theme/ButtonTheme.xaml" />
                 <ResourceDictionary Source="Theme/DataGridTheme.xaml" />
                 <ResourceDictionary Source="Theme/ModalFormTheme.xaml" />
+                <ResourceDictionary Source="Theme/ScrollViewerTheme.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">
