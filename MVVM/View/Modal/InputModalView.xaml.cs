@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using storeManagement.Core;
 
 namespace storeManagement.MVVM.View
 {
@@ -25,7 +26,7 @@ namespace storeManagement.MVVM.View
             InitializeComponent();
         }
 
-        SqlConnection conn = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog=StoreManagement;Integrated Security = True;");
+        SqlConnection conn = new DBHelper().Connection;
 
         public bool isValid()
         {
@@ -59,7 +60,6 @@ namespace storeManagement.MVVM.View
             Product_nameInput.Clear();
             Product_qtyInput.Clear();
             Product_priceInput.Clear();
-            Product_descInput.Clear();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

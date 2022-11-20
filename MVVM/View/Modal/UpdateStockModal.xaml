@@ -5,8 +5,40 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:storeManagement.MVVM.View.Modal"
         mc:Ignorable="d"
-        Title="UpdateStockModal" Height="450" Width="800">
-    <Grid>
+        Title="Update item" Height="450" Width="500"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Background="Transparent" >
         
-    </Grid>
+    <Border Background="#DF6E21">
+        <Grid VerticalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <Border>
+                <TextBlock Text="Update item" HorizontalAlignment="Center" FontSize="24" Foreground="WhiteSmoke" FontWeight="SemiBold"/>
+            </Border>
+
+            <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="15,5,15,0">
+                <StackPanel  HorizontalAlignment="Center">
+                    <TextBlock Text="Product No" Style="{StaticResource LabelStyle}"/>
+                    <TextBlock Text="Product Name" Style="{StaticResource LabelStyle}"/>
+                    <TextBlock Text="Add new quantity" Style="{StaticResource LabelStyle}" />
+                </StackPanel>
+                <StackPanel Margin="0,3,0,0">
+                    <TextBox x:Name="Product_noInput" IsEnabled="False" Style="{StaticResource TextBoxStyle}"/>
+                    <TextBox x:Name="Product_nameInput" IsEnabled="False" Style="{StaticResource TextBoxStyle}"/>
+                    <TextBox x:Name="Product_qtyInput" PreviewTextInput="NumberValidationTextBox" Style="{StaticResource TextBoxStyle}"/>
+                </StackPanel>
+            </StackPanel>
+
+            <WrapPanel Grid.Row="2" HorizontalAlignment="Center" Margin="0,15,0,0">
+                <Button Content="Cancel" Style="{StaticResource DangerButton}" IsCancel="True" Margin="0,0,15,0"/>
+                <Button Content="Update item" Style="{StaticResource SuccessButton}" Click="Submit_buttonClick"/>
+            </WrapPanel>
+        </Grid>
+    </Border>
 </Window>

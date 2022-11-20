@@ -17,22 +17,34 @@ namespace storeManagement.MVVM.ViewModel
     internal class ManageStockViewModel : ObservableObject
     {
 
-        #region All of RelayCommand
+        #region All of RelayCommand Declaration
         public RelayCommand ButtonTest { get; set; }
         public RelayCommand AddItemBtnCommand { get; set; }
         public RelayCommand DeleteDataBtnCommand { get; set; }
         public RelayCommand UpdateDataBtnCommand { get; set; }
         public RelayCommand UpdateStockProductCommand { get; set; }
         public RelayCommand RefreshDataCommand { get; set; }
+        public RelayCommand DeleteStockBtnCommand { get; set; }
         #endregion
 
         private DataTable _products;
+        private DataTable _stocks;
         ProductModel product = new ProductModel();
+        StockHistoryModel stockHistory = new StockHistoryModel(); 
         public DataTable Products 
         { 
             get { return _products; } 
             set { 
                 _products = value;
+                OnPropertyChanged();
+            }
+        }
+        public DataTable StockHistory
+        {
+            get { return _stocks; }
+            set
+            {
+                _stocks = value;
                 OnPropertyChanged();
             }
         }
@@ -52,10 +64,11 @@ namespace storeManagement.MVVM.ViewModel
             Products = product.getAllProduct();
         }
 
+        
+
         public ManageStockViewModel()
         {
-            Products = product.getAllProduct();
-
+            StockHistory = stockHistory.getAllStockHistory();
             RefreshDataCommand = new RelayCommand(o =>
             {
                 Products = product.getAllProduct();
@@ -79,11 +92,17 @@ namespace storeManagement.MVVM.ViewModel
 
             UpdateStockProductCommand = new RelayCommand(o =>
             {
-                UpdateStockModal updateStock = new UpdateStockModal();
+                UpdateStockModal updateStock = new UpdateStockModal(o.ToString());
                 updateStock.ShowDialog();
                 Products = product.getAllProduct();
+                StockHistory = stockHistory.getAllStockHistory();
             });
 
+            DeleteStockBtnCommand = new RelayCommand(o =>
+            {
+                stockHistory.deleteStockHistory(o.ToString());
+                StockHistory = stockHistory.getAllStockHistory();
+            });
 
         }
     }

@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +14,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Text.RegularExpressions;
+using storeManagement.MVVM.Model;
 
 namespace storeManagement.MVVM.View.Modal
 {
@@ -19,9 +24,66 @@ namespace storeManagement.MVVM.View.Modal
     /// </summary>
     public partial class UpdateStockModal : Window
     {
-        public UpdateStockModal()
+        string ProductNo;
+        StockHistoryModel stockHistoryModel = new StockHistoryModel();
+        public UpdateStockModal(string productNo)
         {
             InitializeComponent();
+            ProductNo = productNo;
+            getProduct();
         }
+
+        SqlConnection conn = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog=StoreManagement;Integrated Security = True;");
+
+        public void getProduct()
+        {
+            SqlCommand cmd = new SqlCommand("SELECT * FROM Products WHERE Product_no = " + ProductNo, conn);
+
+            conn.Open();
+
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                ShowProduct((IDataRecord)reader);
+            }
+
+            reader.Close();
+            conn.Close();
+        }
+
+        public void ShowProduct(IDataRecord dataRecord)
+        {
+            Trace.WriteLine(String.Format("{0}, {1}", dataRecord[0], dataRecord[1]));
+            Product_noInput.Text = Convert.ToString(dataRecord[1]);
+            Product_nameInput.Text = Convert.ToString(dataRecord[2]);
+        }
+
+        private void Submit_buttonClick(object sender, RoutedEventArgs e)
+        {
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand("UPDATE Products SET Quantity += " + Product_qtyInput.Text + " WHERE Product_no = " + Product_noInput.Text, conn);
+            try
+            {
+                cmd.ExecuteNonQuery();
+                stockHistoryModel.insertStockHistory(Convert.ToInt32(Product_noInput.Text),Convert.ToInt32(Product_qtyInput.Text));
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+
     }
 }

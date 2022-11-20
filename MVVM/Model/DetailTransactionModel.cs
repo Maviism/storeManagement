@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using storeManagement.Core;
 
 namespace storeManagement.MVVM.Model
@@ -12,6 +13,7 @@ namespace storeManagement.MVVM.Model
     {
 
         SqlConnection conn = new DBHelper().Connection;
+        ProductModel product = new ProductModel();
         public void insertDetailTransactionToDB(int transaction_id, string product_name, int quantity, decimal price)
         {
             SqlCommand cmd = new SqlCommand("INSERT INTO Detail_transaction(Transaction_id, Product_name, Quantity, Total_price) VALUES (@Transaction_id, @Product_name, @Quantity ,@Total_price)", conn);
@@ -20,8 +22,20 @@ namespace storeManagement.MVVM.Model
             cmd.Parameters.AddWithValue("@Quantity", quantity);
             cmd.Parameters.AddWithValue("@Total_price", price);
             conn.Open();
-            cmd.ExecuteNonQuery();
-            conn.Close();
+            try
+            {
+                cmd.ExecuteNonQuery();
+                product.updateStockProduct(product_name, quantity);
+
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
         }
 
 

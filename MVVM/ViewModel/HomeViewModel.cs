@@ -24,6 +24,7 @@ namespace storeManagement.MVVM.ViewModel
             } 
         }
 
+        public DataTable OutOfStockProduct { get; set; }
         public decimal DailyIncome { get; set; }
 
         public int SoldoutItem { get; set; }
@@ -45,8 +46,9 @@ namespace storeManagement.MVVM.ViewModel
         {
             DataTable dt = productModel.getAllProduct();
             TotalItem = dt.Rows.Count;
-            TotalTransaction = transactionModel.getTotalTransaction(DateTime.Today.ToString("yyyy-MM-dd"));
+            OutOfStockProduct = productModel.getOutOfStockProduct();
             SoldoutItem = 0;
+            TotalTransaction = transactionModel.getTotalTransaction(DateTime.Today.ToString("yyyy-MM-dd"));
             DailyIncome = transactionModel.getDailyIncome();
         }
     }

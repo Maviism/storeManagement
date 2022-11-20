@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using storeManagement.Core;
+using storeManagement.MVVM.Model;
 
 namespace storeManagement.MVVM.ViewModel
 {
@@ -31,6 +33,8 @@ namespace storeManagement.MVVM.ViewModel
             }
         }
 
+        ProductModel productModel = new ProductModel();
+        TransactionModel transactionModel = new TransactionModel();
         public MainViewModel()
         {
             HomeVM = new HomeViewModel();
@@ -42,6 +46,10 @@ namespace storeManagement.MVVM.ViewModel
             HomeViewCommand = new RelayCommand(o =>
             {
                 CurrentView = HomeVM;
+                DataTable dt = productModel.getAllProduct();
+                HomeVM.TotalItem = dt.Rows.Count;
+                HomeVM.TotalTransaction = transactionModel.getTotalTransaction(DateTime.Today.ToString("yyyy-MM-dd"));
+                HomeVM.DailyIncome = transactionModel.getDailyIncome();
             });
             
             TransactionViewCommand = new RelayCommand(o =>
@@ -52,6 +60,8 @@ namespace storeManagement.MVVM.ViewModel
             ManageStockViewCommand = new RelayCommand(o =>
             {
                 CurrentView = ManageStockVM;
+                ManageStockVM.Products = productModel.getAllProduct();
+                ManageStockVM.StockHistory = new StockHistoryModel().getAllStockHistory();
             });
 
         }

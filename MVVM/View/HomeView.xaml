@@ -98,12 +98,13 @@
                     <StackPanel>
                         <TextBlock Text="Out of stock product!" FontSize="24" Foreground="#D81E17" FontWeight="Medium"/>
                         <DataGrid Style="{StaticResource DataGridStyle}"
-                                    ItemsSource="{Binding }"
-                                    Width="300" Height="300" Background="#10ff0000">
+                                  LoadingRow="DataGrid_LoadingRow"
+                                  ItemsSource="{Binding OutOfStockProduct.DefaultView}"
+                                  Width="300" Height="300" Background="#10ff0000">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Product Name" Width="150" IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Product Name" Binding="{Binding Product_name}" Width="150" IsReadOnly="True"/>
                                 <DataGridTextColumn Header="Product No" Width="*" IsReadOnly="True"/>
-                            </DataGrid.Columns>
+                            </DataGrid.Columns>           
                         </DataGrid>
                     </StackPanel>
                 </Border>

@@ -53,6 +53,10 @@
                     <RadioButton Content="Manage stock"
                                  Style="{StaticResource MenuButtonTheme2}"
                                  Command="{Binding ManageStockViewCommand}"/>
+                    
+                    <RadioButton Content="Sales report"
+                                 Style="{StaticResource MenuButtonTheme2}"
+                                 Command="{Binding ManageStockViewCommand}"/>
                 </StackPanel>
             </Border>
 

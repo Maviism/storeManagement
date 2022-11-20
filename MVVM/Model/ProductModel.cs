@@ -53,6 +53,17 @@ namespace storeManagement.MVVM.Model
             return dt;
         }
 
+        public DataTable getOutOfStockProduct()
+        {
+            SqlCommand cmd = new SqlCommand("SELECT * FROM Products WHERE Quantity < 1", conn);
+            DataTable dt = new DataTable();
+            conn.Open();
+            SqlDataReader sdr = cmd.ExecuteReader();
+            dt.Load(sdr);
+            conn.Close();
+            return dt;
+        }
+
         public void deleteProduct(object Product_no)
         {
             conn.Open();
@@ -119,17 +130,25 @@ namespace storeManagement.MVVM.Model
                 conn.Close();
             }
         }
-
-        public DataTable getOutOfStockProducts()
+        public void updateStockProduct(string product_name, int quantity)
         {
-            SqlCommand cmd = new SqlCommand("SELECT * FROM Products WHERE Quantity < 3", conn);
-            DataTable dt = new DataTable();
             conn.Open();
-            SqlDataReader sdr = cmd.ExecuteReader();
-            dt.Load(sdr);
-            conn.Close();
-            return dt;
+
+            SqlCommand cmd = new SqlCommand("UPDATE Products SET Quantity -= " + quantity + " WHERE Product_name = '" + product_name + "'", conn);
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
         }
+
 
     }
 }

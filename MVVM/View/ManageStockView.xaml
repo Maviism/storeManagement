@@ -6,15 +6,12 @@
              xmlns:local="clr-namespace:storeManagement.MVVM.View"
              xmlns:fa="http://schemas.fontawesome.io/icons/"
              mc:Ignorable="d"
+             Width="1020"
              >
+    <ScrollViewer>
     <StackPanel>
         <TextBlock Text="Manage Stock" Margin="5,10,0,10" Foreground="WhiteSmoke" FontWeight="SemiBold" FontSize="28" />
-        <Grid Margin="5">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-            </Grid.RowDefinitions>
-
+        <StackPanel Margin="5">
             <Border>
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -110,7 +107,49 @@
                 </DataGrid>
             </Border>
             <!--End DataGrid-->
-            
-        </Grid>
+
+            <TextBlock Text="Stock history" Foreground="WhiteSmoke" FontSize="24" Margin="5"/>
+            <Border Grid.Row="1" Margin="3,00,0,0">
+                <DataGrid x:Name="Stock_history"
+                          Style="{StaticResource DataGridStyle}"
+                          ItemsSource="{Binding StockHistory.DefaultView}"
+                          Width="800" Height="400"
+                          
+                          ColumnWidth="*"
+                          RowStyle="{StaticResource RowStyle}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="No" Width="30"/>
+                        <DataGridTextColumn Header="Product No" 
+                                            Binding="{Binding Product_no}" Width="100"/>
+                        <DataGridTextColumn Header="Product Name"
+                                            IsReadOnly="True"
+                                            Binding="{Binding Product_name}"
+                                            Width="220"/>
+                        <DataGridTextColumn Header="Quantity" 
+                                            Binding="{Binding Quantity}"
+                                            Width="120"/>
+                        <DataGridTextColumn Header="Datetime" 
+                                            Binding="{Binding Created_at}"
+                                            Width="170"/>
+
+                        <DataGridTemplateColumn Header="Action" Width="120">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button Command="{Binding Path=DataContext.DeleteStockBtnCommand, 
+                                        RelativeSource= {RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}"
+                                                CommandParameter="{Binding Id}"
+                                                Style="{StaticResource DangerButton}" Height="25">
+                                            <fa:FontAwesome Icon="Trash" FontSize="20"/>
+                                        </Button>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Border>
+        </StackPanel>
     </StackPanel>
+    </ScrollViewer>
 </UserControl>

@@ -74,9 +74,6 @@ namespace storeManagement.MVVM.ViewModel
         }
 
         #endregion
-        public void addTransation()
-        {
-        }
 
         public void convertToCollection()
         {
@@ -95,7 +92,6 @@ namespace storeManagement.MVVM.ViewModel
             }    
         }
 
-        
         private void refreshAllData()
         {
             TotalPriceTransaction = 0;
@@ -147,12 +143,13 @@ namespace storeManagement.MVVM.ViewModel
             PaymentBtnCommand = new RelayCommand(o =>
             {
                 int transactionId = new TransactionModel().getLastTransactionId();
+                DetailTransactionModel detailTransactionModel = new DetailTransactionModel();
                 if(SProduct != null)
                 {
                     new TransactionModel().insertTransactionToDB(transactionId,TotalPriceTransaction);
                     foreach (TransactionModel obj in TransactionList)
                     {
-                        new DetailTransactionModel().insertDetailTransactionToDB(transactionId, obj.Name, obj.Quantity, obj.TotalPrice);
+                        detailTransactionModel.insertDetailTransactionToDB(transactionId, obj.Name, obj.Quantity, obj.TotalPrice);
                     }
                     refreshAllData();
                     MessageBox.Show("Payment successfully");

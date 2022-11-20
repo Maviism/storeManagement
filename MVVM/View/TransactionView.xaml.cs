@@ -39,14 +39,5 @@ namespace storeManagement.MVVM.View
             e.Handled = regex.IsMatch(e.Text);
         }
 
-
-
-
-
-
-
-
-
-
     }
 }

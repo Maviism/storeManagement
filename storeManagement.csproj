@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="M.png" />
     <None Remove="sms.ico" />
   </ItemGroup>
 
@@ -20,6 +21,10 @@
 
   <ItemGroup>
     <Resource Include="sms.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <SplashScreen Include="M.png" />
   </ItemGroup>
 
 </Project>

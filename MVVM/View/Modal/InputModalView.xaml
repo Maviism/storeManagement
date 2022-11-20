@@ -30,15 +30,13 @@
                     <TextBlock Text="Product Name" Style="{StaticResource LabelStyle}"/>
                     <TextBlock Text="Quantity" Style="{StaticResource LabelStyle}"/>
                     <TextBlock Text="Price" Style="{StaticResource LabelStyle}"/>
-                    <TextBlock Text="Description" Style="{StaticResource LabelStyle}"/>
-                        
+
                 </StackPanel>
                 <StackPanel Margin="0,3,0,0">
                     <TextBox x:Name="Product_noInput" Style="{StaticResource TextBoxStyle}"/>
                     <TextBox x:Name="Product_nameInput" Style="{StaticResource TextBoxStyle}"/>
                     <TextBox x:Name="Product_qtyInput" Style="{StaticResource TextBoxStyle}"/>
                     <TextBox x:Name="Product_priceInput" Style="{StaticResource TextBoxStyle}"/>
-                    <TextBox x:Name="Product_descInput" Style="{StaticResource TextBoxStyle}"/>
                 </StackPanel>
             </StackPanel>
 
