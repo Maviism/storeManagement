@@ -127,7 +127,7 @@
 
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="FontSize" Value="18" />
+            <Setter Property="FontSize" Value="15" />
             <Setter Property="Height" Value="50" />
 
         </Style.Setters>
@@ -143,6 +143,57 @@
                               HorizontalAlignment="Stretch"
                               Background="{TemplateBinding Background}">
                                 <fa:FontAwesome Margin="10,0,3,0" Icon="Dropbox" Foreground="#3667FD"  FontSize="28" VerticalAlignment="Center"/>
+                                <Label Content="{TemplateBinding Property=Content}"
+                                       Foreground="WhiteSmoke"
+                                       VerticalAlignment="Center"
+                                       FontWeight="SemiBold"
+                                       />
+                            </StackPanel>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style BasedOn="{StaticResource {x:Type ToggleButton}}" 
+           TargetType="{x:Type RadioButton}"
+           x:Key="MenuButtonTheme3">
+        <Style.Setters>
+            <Setter Property="Foreground" Value="WhiteSmoke"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RadioButton">
+                        <StackPanel VerticalAlignment="Center" 
+                              HorizontalAlignment="Stretch"
+                              Background="{TemplateBinding Background}" Orientation="Horizontal">
+                            <fa:FontAwesome Margin="10,0,3,0" Icon="BarChartOutline"  Foreground="#D22779"  FontSize="28" VerticalAlignment="Center"/>
+                            <Label Foreground="WhiteSmoke" Content="{TemplateBinding Property=Content}"
+                                       VerticalAlignment="Center"
+                                       />
+                        </StackPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="Height" Value="50" />
+
+        </Style.Setters>
+        <Style.Triggers>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="Background" Value="#BF5218"/>
+                <!--TODO Will be better if we can just throw fontweight to parentstyle -->
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="RadioButton">
+                            <StackPanel Orientation="Horizontal"
+                                VerticalAlignment="Stretch" 
+                              HorizontalAlignment="Stretch"
+                              Background="{TemplateBinding Background}">
+                                <fa:FontAwesome Margin="10,0,3,0" Icon="BarChartOutline" Foreground="#FF008E"  FontSize="28" VerticalAlignment="Center"/>
                                 <Label Content="{TemplateBinding Property=Content}"
                                        Foreground="WhiteSmoke"
                                        VerticalAlignment="Center"

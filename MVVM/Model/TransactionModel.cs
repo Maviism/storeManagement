@@ -14,16 +14,32 @@ namespace storeManagement.MVVM.Model
     internal class TransactionModel
     {
         #region Properties
-        SqlConnection conn = new DBHelper().Connection;
         public int NoIndex { get; set; }
+        public int TransactionId { get; set; }
         public int ProductNo { get; set; }
         public string Name { get; set; }
         public int Quantity { get; set; }
         public decimal Price { get; set; }
         public decimal TotalPrice { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DataTable DetailTransaction { get; set; }
         #endregion
 
+        SqlConnection conn = new DBHelper().Connection;
+        
         #region Methods
+        public DataTable getAllTransaction()
+        {
+            SqlCommand cmd = new SqlCommand("SELECT * FROM Transactions", conn);
+            DataTable dt = new DataTable();
+            conn.Open();
+            SqlDataReader sdr = cmd.ExecuteReader();
+            dt.Load(sdr);
+            conn.Close();
+            return dt;
+        }
+        
+
         public int getLastTransactionId()
         {
             string strQuery = "SELECT TOP 1 * FROM Transactions ORDER BY Transaction_id DESC";

@@ -11,16 +11,17 @@ namespace storeManagement.MVVM.ViewModel
 {
     internal class MainViewModel : ObservableObject
     {
+        #region All of relayCommand Declaration
         public RelayCommand HomeViewCommand { get; set; }
         public RelayCommand TransactionViewCommand { get; set; }
-
         public RelayCommand ManageStockViewCommand { get; set; }
+        public RelayCommand SalesReportViewCommand { get; set; }
+        #endregion
 
         public HomeViewModel HomeVM { get; set; }
-    
         public TransactionViewModel TransactionVM { get; set; }
-
         public ManageStockViewModel ManageStockVM { get; set; }
+        public SalesReportViewModel SalesReportVM { get; set; }
 
         private object _currentView;
 
@@ -40,6 +41,7 @@ namespace storeManagement.MVVM.ViewModel
             HomeVM = new HomeViewModel();
             TransactionVM = new TransactionViewModel();
             ManageStockVM = new ManageStockViewModel();
+            SalesReportVM = new SalesReportViewModel();
 
             CurrentView = HomeVM;
 
@@ -62,6 +64,12 @@ namespace storeManagement.MVVM.ViewModel
                 CurrentView = ManageStockVM;
                 ManageStockVM.Products = productModel.getAllProduct();
                 ManageStockVM.StockHistory = new StockHistoryModel().getAllStockHistory();
+            });
+
+            SalesReportViewCommand = new RelayCommand(o =>
+            {
+                CurrentView = SalesReportVM;
+
             });
 
         }

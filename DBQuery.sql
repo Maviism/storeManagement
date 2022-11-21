@@ -72,6 +72,7 @@ TRUNCATE TABLE Transactions
 SELECT TOP 1 * FROM Transactions ORDER BY Transaction_id DESC
 SELECT COUNT(Transaction_id) FROM Transactions WHERE CONVERT(VARCHAR(25), Created_at,126) LIKE '%2022-10-28%'
 SELECT * FROM Transactions WHERE CONVERT(VARCHAR(25), Created_at,126) LIKE '%2022-11-19%' 
+SELECT * FROM Detail_transaction WHERE Transaction_id = 1
 
 SELECT Stock_history.Product_no, Products.Product_name, Stock_history.Quantity, Stock_history.Created_at
 FROM Stock_history

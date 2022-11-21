@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -38,6 +39,27 @@ namespace storeManagement.MVVM.Model
             }
         }
 
+        public DataTable getAllDetailTransaction()
+        {
+            SqlCommand cmd = new SqlCommand("SELECT * FROM Transactions", conn);
+            DataTable dt = new DataTable();
+            conn.Open();
+            SqlDataReader sdr = cmd.ExecuteReader();
+            dt.Load(sdr);
+            conn.Close();
+            return dt;
+        }
+
+        public DataTable getDetailTransactionWithTransactionID(int transactionID)
+        {
+            SqlCommand cmd = new SqlCommand("SELECT * FROM Detail_transaction WHERE Transaction_id = " + transactionID, conn);
+            DataTable dt = new DataTable();
+            conn.Open();
+            SqlDataReader sdr = cmd.ExecuteReader();
+            dt.Load(sdr);
+            conn.Close();
+            return dt;
+        }
 
     }
 }

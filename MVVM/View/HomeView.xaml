@@ -12,7 +12,7 @@
     <ScrollViewer Padding="0,0,0,0" Style="{StaticResource ScrollViewerTheme}">
         
     <StackPanel>
-        <Label Content="Home" Foreground="WhiteSmoke"
+        <TextBlock Text="Home" Margin="5,10,0,10" Foreground="WhiteSmoke"
                FontSize="28" FontWeight="SemiBold"/>
         <StackPanel Margin="5" HorizontalAlignment="Left">
             <Border Background="#DF6E21" CornerRadius="8" Width="900" Margin="0,0,10,10">

@@ -9,13 +9,12 @@
              Width="850"
              >
     <StackPanel>
-        <Label Content="Transaction" Foreground="WhiteSmoke" FontSize="28" FontWeight="Medium"/>
+        <TextBlock Text="Transaction" Margin="5,10,0,10" Foreground="WhiteSmoke" FontSize="28" FontWeight="Medium"/>
         <StackPanel Margin="15,10,0,5">
             <Border Width="250" Height="50"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
-                    Background="WhiteSmoke"
-                    >
+                    Background="WhiteSmoke">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="10,0,0,0">
                     <Label Content="$" FontSize="34" HorizontalAlignment="Center" FontWeight="Medium" VerticalAlignment="Center" Padding="2"/>
                     <Label x:Name="TotalAmount" Content="{Binding TotalPriceTransaction}" FontWeight="Medium" FontSize="34" Padding="2"/>
