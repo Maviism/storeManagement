@@ -5,87 +5,109 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:storeManagement.MVVM.View"
              xmlns:fa="http://schemas.fontawesome.io/icons/"
+             Loaded="Window_Loaded"
              mc:Ignorable="d"
-             Width="850"
+             Width="1080"
              >
-    <StackPanel>
-        <TextBlock Text="Transaction" Margin="5,10,0,10" Foreground="WhiteSmoke" FontSize="28" FontWeight="Medium"/>
-        <StackPanel Margin="15,10,0,5">
-            <Border Width="250" Height="50"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    Background="WhiteSmoke">
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="10,0,0,0">
-                    <Label Content="$" FontSize="34" HorizontalAlignment="Center" FontWeight="Medium" VerticalAlignment="Center" Padding="2"/>
-                    <Label x:Name="TotalAmount" Content="{Binding TotalPriceTransaction}" FontWeight="Medium" FontSize="34" Padding="2"/>
-                </StackPanel>
-            </Border>
-                    <Button Command="{Binding openModal}" Content="Click to scan"/>
-            <StackPanel Orientation="Horizontal" Margin="0,10,0,10">
-                <ComboBox x:Name="SelectedProduct" 
-                  ItemsSource="{Binding Path=ProductList}"
-                  SelectedItem="{Binding Path=SProduct}"
-                  DisplayMemberPath="ProductName" 
-                  HorizontalAlignment="Left" VerticalAlignment="Top" Width="194" Height="28" />
-                <TextBox x:Name="NumberTextBox" Margin="5,0,5,0" PreviewTextInput="NumberValidationTextBox"
-                    HorizontalAlignment="Left" Height="28" FontSize="18" TextWrapping="Wrap" Text="{Binding ProductQty}" VerticalAlignment="Top" Width="33"/>
-                <Label Content="Adet" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                <Button Content="Add item" HorizontalAlignment="Left" VerticalAlignment="Center" Width="94" Style="{StaticResource PrimaryButton}"  Command="{Binding AddItemBtnCommand}"/>
+    <StackPanel Orientation="Horizontal">
+        <StackPanel Width="760">
+            <TextBlock Text="Transaction" Margin="5,10,0,10" Foreground="WhiteSmoke" FontSize="28" FontWeight="Medium"/>
+            <StackPanel Margin="15,10,0,5">
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Vertical">
+                        <Border Width="250" Height="50"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Background="WhiteSmoke">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="10,0,0,0">
+                                <Label Content="$" FontSize="34" HorizontalAlignment="Center" FontWeight="Medium" VerticalAlignment="Center" Padding="2"/>
+                                <Label x:Name="TotalAmount" Content="{Binding TotalPriceTransaction}" FontWeight="Medium" FontSize="34" Padding="2"/>
+                            </StackPanel>
+                        </Border>
 
-            </StackPanel>
-
-            <StackPanel>
-                <DataGrid x:Name="ListTransaction"
-                          ItemsSource="{Binding TransactionList}"
-                          Height="300"
-                          AutoGenerateColumns="False"
-                          HorizontalAlignment="Left"
-                          Width="800"
-                          CanUserAddRows="False"
-                          Background="WhiteSmoke">
-                    <DataGrid.Columns>
-                        <DataGridTemplateColumn Header="Action" Width="50">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Button Command="{Binding Path=DataContext.DeleteItemBtnCommand, 
-                                        RelativeSource= {RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}"
-                                                CommandParameter="{Binding NoIndex}"
-                                                Style="{StaticResource DangerButton}" Height="20" Margin="0,0,0,0" Padding="0,0,0,0">
-                                            <fa:FontAwesome Icon="Trash" FontSize="15"/>
-                                        </Button>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                        <DataGridTextColumn Header="Product No" Width="100"
-                                            Binding="{Binding ProductNo}" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Product Name" Width="250"
-                                            Binding="{Binding Name}" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Qty" Width="100" 
-                                            Binding="{Binding Quantity}" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Total Price" Width="120" 
-                                            Binding="{Binding TotalPrice}" IsReadOnly="True"/>
-                    </DataGrid.Columns>
-
-                </DataGrid>
-            </StackPanel>
-
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0, 10, 5,0">
-                <StackPanel Orientation="Horizontal" Margin="0,0,35,0">
-                    <StackPanel VerticalAlignment="Center">
-                        <TextBlock Text="Cash" Margin="0,0,0,15" FontSize="20"/>
-                        <TextBlock Text="Change" FontSize="20"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,10">
+                            <ComboBox x:Name="SelectedProduct" 
+                              ItemsSource="{Binding Path=ProductList}"
+                              SelectedItem="{Binding Path=SProduct}"
+                              DisplayMemberPath="ProductName" VerticalAlignment="Top" Width="250" Height="28" />
+                            <TextBox x:Name="NumberTextBox" Margin="5,0,5,0" PreviewTextInput="NumberValidationTextBox"
+                                HorizontalAlignment="Left" Height="28" FontSize="18" TextWrapping="Wrap" Text="{Binding ProductQty}" VerticalAlignment="Top" Width="33"/>
+                            <Label Content="Adet" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                            <Button Content="Add item" HorizontalAlignment="Left" VerticalAlignment="Center" Width="94" Style="{StaticResource PrimaryButton}"  Command="{Binding AddItemBtnCommand}"/>
+                        </StackPanel>
                     </StackPanel>
-                    <StackPanel>
-                        <TextBox Width="150" Text="{Binding Cash, UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox" Height="35" Margin="5"/>
-                        <TextBox Width="150" Text="{Binding Change}" IsEnabled="False" Height="35" Margin="5"/>
-                    </StackPanel>
+
                 </StackPanel>
-                <Button Margin="0, 25,50, 0" Content="Payment" Command="{Binding PaymentBtnCommand}" HorizontalAlignment="Right" Height="45" Style="{StaticResource SuccessButton}" VerticalAlignment="Top" Width="122"/>
+
+
+                <StackPanel>
+                    <DataGrid x:Name="ListTransaction"
+                              ItemsSource="{Binding TransactionList}"
+                              Height="300"
+                              AutoGenerateColumns="False"
+                              HorizontalAlignment="Left"
+                              Width="732"
+                              CanUserAddRows="False"
+                              Background="WhiteSmoke">
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn Header="Action" Width="50">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Button Command="{Binding Path=DataContext.DeleteItemBtnCommand, 
+                                            RelativeSource= {RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}"
+                                                    CommandParameter="{Binding NoIndex}"
+                                                    Style="{StaticResource DangerButton}" Height="20" Margin="0,0,0,0" Padding="0,0,0,0">
+                                                <fa:FontAwesome Icon="Trash" FontSize="15"/>
+                                            </Button>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTextColumn Header="Product No" Width="100"
+                                                Binding="{Binding ProductNo}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Product Name" Width="240"
+                                                Binding="{Binding Name}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Qty" Width="100" 
+                                                Binding="{Binding Quantity}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Price" Width="120" 
+                                                Binding="{Binding TotalPrice}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Total Price" Width="*" 
+                                                Binding="{Binding TotalPrice}" IsReadOnly="True"/>
+                        </DataGrid.Columns>
+
+                    </DataGrid>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0, 10, 0,0">
+                    <StackPanel Orientation="Horizontal" Margin="0,0,35,0">
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock Text="Cash" Margin="0,0,0,15" FontSize="20"/>
+                            <TextBlock Text="Change" FontSize="20"/>
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBox Width="150" Text="{Binding Cash, UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox" Height="35" Margin="5"/>
+                            <TextBox Width="150" Text="{Binding Change}" IsEnabled="False" Height="35" Margin="5"/>
+                        </StackPanel>
+                    </StackPanel>
+                    <Button Margin="0, 25,20, 0" Content="Payment" Command="{Binding PaymentBtnCommand}" HorizontalAlignment="Right" Height="45" Style="{StaticResource SuccessButton}" VerticalAlignment="Top" Width="122"/>
+                </StackPanel>
             </StackPanel>
+
+
         </StackPanel>
+        <StackPanel Margin="0,70,0,0" Width="250">
+            <TextBlock Text="Select Scanner" Foreground="White" />
+            <ComboBox x:Name="scannerDevice" HorizontalAlignment="Left" Margin="0,10,0,10" VerticalAlignment="Top" Width="250"/>
+            <Button Content="Start" Style="{StaticResource PrimaryButton}" x:Name="btnScanner" Click="btnToggleScanner_Click" Height="25"/>
+            <Image x:Name="imgBox" Height="150" Margin="0,20,0,0" Width="250"/>
+            <StackPanel Orientation="Horizontal">
+                <TextBox x:Name="productNo" Padding="3" Width="200" IsEnabled="False" Height="25"/>
+                <TextBox Text="1" TextAlignment="Right" Padding="3" Width="40" Margin="10,0,0,0"/>
+                
+            </StackPanel>
 
-        
+        </StackPanel>
     </StackPanel>
+
 </UserControl>
