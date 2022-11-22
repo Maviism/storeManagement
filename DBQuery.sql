@@ -79,5 +79,6 @@ FROM Stock_history
 INNER JOIN Products ON Stock_history.Product_no = Products.Product_no
 
 SELECT * FROM Stock_history
+SELECT * FROM Products
 
 DELETE FROM Stock_history Where Id = 4

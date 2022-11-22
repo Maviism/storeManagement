@@ -23,7 +23,7 @@ namespace storeManagement.MVVM.ViewModel
         private decimal _change;
         private int _productQty = 1;
         private decimal _totalpriceTransaction;
-        private int i = 0; //indexing new SProduct(_transactionlis) for easy to remove
+        public int i { get; set; } //indexing new SProduct(_transactionlis) for easy to remove
         private ProductModel _sproduct;
         private ObservableCollection<ProductModel> _productList;
         private ObservableCollection<TransactionModel> _transactionList;
@@ -76,8 +76,7 @@ namespace storeManagement.MVVM.ViewModel
 
         #endregion
 
-
-        public void convertToCollection()
+        public void convertProductListToCollection()
         {
             DataTable products = new ProductModel().getAllProduct();
             ProductList = new ObservableCollection<ProductModel>();
@@ -88,7 +87,7 @@ namespace storeManagement.MVVM.ViewModel
                     ProductNo = (int)row["Product_no"],
                     ProductName = (string)row["Product_name"],
                     Price = (decimal)row["Price"],
-                    Qty = (int)row["Quantity"]
+                    Qty = (int)row["Quantity"],
                 };
                 ProductList.Add(obj);
             }    
@@ -105,7 +104,8 @@ namespace storeManagement.MVVM.ViewModel
         
         public TransactionViewModel()
         {
-            convertToCollection();
+            convertProductListToCollection();
+            i = 0;
             TotalPriceTransaction = new Decimal(00);
             TransactionList = new ObservableCollection<TransactionModel>();
 

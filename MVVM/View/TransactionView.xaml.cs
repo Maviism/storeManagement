@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Data;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -26,6 +21,9 @@ using System.IO;
 using ZXing.Windows.Compatibility;
 using ZXing;
 using System.Windows.Threading;
+using storeManagement.MVVM.ViewModel;
+using System.Data;
+using System.Media;
 
 namespace storeManagement.MVVM.View
 {
@@ -38,10 +36,15 @@ namespace storeManagement.MVVM.View
         VideoCaptureDevice captureDevice;
         DispatcherTimer timer = new DispatcherTimer();
         public bool isScannerOn = false;
+        static string path = "D:\\Codes\\c#\\storeManagement\\beep_sound.wav";
+        SoundPlayer soundEffect = new SoundPlayer(path);
+
+        private TransactionViewModel viewModel = new TransactionViewModel();
 
         public TransactionView()
         {
             InitializeComponent();
+            this.DataContext = viewModel;
             timer.Tick += new EventHandler(timer_Tick);
             timer.Interval = new TimeSpan(0, 0, 1);
         }
@@ -98,8 +101,11 @@ namespace storeManagement.MVVM.View
 
         private void CaptureDevice_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
+            try
+            {
+
             this.Dispatcher.Invoke(() => {
-                System.Drawing.Bitmap imgTes = (Bitmap)eventArgs.Frame.Clone();
+                Bitmap imgTes = (Bitmap)eventArgs.Frame.Clone();
 
                 BitmapImage bi = new BitmapImage();
                 bi.BeginInit();
@@ -107,6 +113,11 @@ namespace storeManagement.MVVM.View
                 imgTes.Save(ms, ImageFormat.Bmp);
                 imgBox.Source = BitmapFrame.Create(ms);
             });
+            }
+            catch (TaskCanceledException ex)
+            {
+                captureDevice.SignalToStop();//prevent error if user close windows directly when camera on
+            }
         }
 
         private void timer_Tick(object sender, EventArgs e)
@@ -127,13 +138,45 @@ namespace storeManagement.MVVM.View
 
                 };
                 Result result = barcodeReader.Decode(bmp);
-
+                //check if there is the same value
+                //add to transactionlist
                 if(result != null)
                 {
-                    productNo.Text = result.ToString();
+                    string temp = result.ToString();
+                    bool isNumeric = int.TryParse(temp, out int n);
+                    productNo.Text = temp;
+                    if (isNumeric)
+                    {
+                        addScannedProductToTransactionList(Convert.ToInt32(temp));
+                        qtyScanner.Text = "1";
+                    }
                 }
             }
+        }
 
+
+
+        private void addScannedProductToTransactionList(int temp)
+        {
+            foreach (ProductModel row in viewModel.ProductList)
+            {
+                if (row.ProductNo == Convert.ToInt32(temp))
+                {
+                    decimal TotalPrice = row.Price * Convert.ToInt32(qtyScanner.Text);
+                    viewModel.TransactionList.Add(new TransactionModel()
+                    {
+                        NoIndex = viewModel.i,
+                        ProductNo = row.ProductNo,
+                        Name = row.ProductName,
+                        Price = row.Price,
+                        Quantity = Convert.ToInt32(qtyScanner.Text),
+                        TotalPrice = TotalPrice,
+                    });
+                    soundEffect.Play();
+                    viewModel.TotalPriceTransaction += TotalPrice;
+                    viewModel.i++;
+                }
+            }
         }
 
 

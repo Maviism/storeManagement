@@ -71,7 +71,7 @@
                             <DataGridTextColumn Header="Qty" Width="100" 
                                                 Binding="{Binding Quantity}" IsReadOnly="True"/>
                             <DataGridTextColumn Header="Price" Width="120" 
-                                                Binding="{Binding TotalPrice}" IsReadOnly="True"/>
+                                                Binding="{Binding Price}" IsReadOnly="True"/>
                             <DataGridTextColumn Header="Total Price" Width="*" 
                                                 Binding="{Binding TotalPrice}" IsReadOnly="True"/>
                         </DataGrid.Columns>
@@ -103,7 +103,7 @@
             <Image x:Name="imgBox" Height="150" Margin="0,20,0,0" Width="250"/>
             <StackPanel Orientation="Horizontal">
                 <TextBox x:Name="productNo" Padding="3" Width="200" IsEnabled="False" Height="25"/>
-                <TextBox Text="1" TextAlignment="Right" Padding="3" Width="40" Margin="10,0,0,0"/>
+                <TextBox Text="1" x:Name="qtyScanner" TextAlignment="Right" Padding="3" Width="40" Margin="10,0,0,0"/>
                 
             </StackPanel>
 
