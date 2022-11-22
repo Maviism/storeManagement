@@ -27,7 +27,7 @@
                         </StackPanel>
                     </Button>
                     <Button Grid.Column="1" Style="{StaticResource WarningButton}" 
-                            Margin="3" Command="{Binding UpdateStockProductCommand}">
+                            Margin="3" Command="{Binding UpdateStockProductCommand}" IsEnabled="False">
                         <StackPanel Orientation="Horizontal">
                             <fa:FontAwesome Icon="Pencil" VerticalAlignment="Center"
                                             FontSize="20"/>

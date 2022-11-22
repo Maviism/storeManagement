@@ -11,6 +11,7 @@ using storeManagement.MVVM.Model;
 using System.Diagnostics;
 using System.Collections.ObjectModel;
 using System.Windows.Controls;
+using storeManagement.MVVM.View.Modal;
 
 namespace storeManagement.MVVM.ViewModel
 {
@@ -75,6 +76,9 @@ namespace storeManagement.MVVM.ViewModel
 
         #endregion
 
+
+        public RelayCommand openModal { get; set; }
+
         public void convertToCollection()
         {
             DataTable products = new ProductModel().getAllProduct();
@@ -106,7 +110,12 @@ namespace storeManagement.MVVM.ViewModel
             convertToCollection();
             TotalPriceTransaction = new Decimal(00);
             TransactionList = new ObservableCollection<TransactionModel>();
-            
+
+            openModal = new RelayCommand(o =>
+            {
+                ScannerModal scannerModal = new ScannerModal();
+                scannerModal.ShowDialog();
+            });
 
             AddItemBtnCommand = new RelayCommand(o =>
             {
