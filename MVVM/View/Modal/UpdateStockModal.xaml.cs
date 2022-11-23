@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Text.RegularExpressions;
 using storeManagement.MVVM.Model;
+using storeManagement.Core;
 
 namespace storeManagement.MVVM.View.Modal
 {
@@ -33,7 +34,7 @@ namespace storeManagement.MVVM.View.Modal
             getProduct();
         }
 
-        SqlConnection conn = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog=StoreManagement;Integrated Security = True;");
+        SqlConnection conn = new DBHelper().Connection;
 
         public void getProduct()
         {
@@ -54,11 +55,10 @@ namespace storeManagement.MVVM.View.Modal
 
         public void ShowProduct(IDataRecord dataRecord)
         {
-            Trace.WriteLine(String.Format("{0}, {1}", dataRecord[0], dataRecord[1]));
             Product_noInput.Text = Convert.ToString(dataRecord[1]);
             Product_nameInput.Text = Convert.ToString(dataRecord[2]);
+            Product_currentInput.Text = Convert.ToString(dataRecord[3]);
         }
-
         private void Submit_buttonClick(object sender, RoutedEventArgs e)
         {
             conn.Open();
@@ -77,6 +77,7 @@ namespace storeManagement.MVVM.View.Modal
             {
                 conn.Close();
             }
+            this.Close();
         }
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
         {

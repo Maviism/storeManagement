@@ -27,10 +27,11 @@ namespace storeManagement.MVVM.ViewModel
         public RelayCommand DeleteStockBtnCommand { get; set; }
         #endregion
 
-        private DataTable _products;
-        private DataTable _stocks;
         ProductModel product = new ProductModel();
         StockHistoryModel stockHistory = new StockHistoryModel(); 
+
+        private DataTable _products;
+        private DataTable _stocks;
         public DataTable Products 
         { 
             get { return _products; } 
@@ -56,15 +57,12 @@ namespace storeManagement.MVVM.ViewModel
             updateModalView.ShowDialog();
             Products = product.getAllProduct();
         }
-
         private void OpenInputModal()
         {
             InputModalView inputModal = new InputModalView();
             inputModal.ShowDialog();
             Products = product.getAllProduct();
         }
-
-        
 
         public ManageStockViewModel()
         {
@@ -102,6 +100,7 @@ namespace storeManagement.MVVM.ViewModel
             {
                 stockHistory.deleteStockHistory(o.ToString());
                 StockHistory = stockHistory.getAllStockHistory();
+                Products = product.getAllProduct();
             });
 
         }

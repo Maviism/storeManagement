@@ -1,5 +1,7 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Windows;
 using storeManagement.Core;
 
@@ -7,11 +9,10 @@ namespace storeManagement.MVVM.Model
 {
     internal class StockHistoryModel
     {
+        int quantity;
+        int productNo;
 
         private SqlConnection conn = new DBHelper().Connection;
-
-        int ProductNo;
-        int Quantity;
 
         public DataTable getAllStockHistory()
         {
@@ -22,6 +23,25 @@ namespace storeManagement.MVVM.Model
             dt.Load(sdr);
             conn.Close();
             return dt;
+        }
+
+        public void getSingleStokHistory(string stockHistoryId)
+        {
+            SqlCommand cmd = new SqlCommand("SELECT * FROM Stock_history WHERE Id = " + stockHistoryId, conn);
+
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                ConvertingProduct((IDataRecord)reader);
+            }
+
+            reader.Close();
+        }
+
+        public void ConvertingProduct(IDataRecord dataRecord)
+        {
+            productNo = Convert.ToInt32(dataRecord[1]);
+            quantity = Convert.ToInt32(dataRecord[2]);
         }
 
         public void insertStockHistory(int productNo, int qty)
@@ -35,15 +55,15 @@ namespace storeManagement.MVVM.Model
             MessageBox.Show("Update stock successfully");
         }
 
-        public void deleteStockHistory(string productId)
+        public void deleteStockHistory(string stockHistoryId)
         {
             conn.Open();
-            SqlCommand cmd = new SqlCommand("DELETE FROM Stock_history Where Id = " + productId, conn);
+            getSingleStokHistory(stockHistoryId);
+            SqlCommand cmd = new SqlCommand("DELETE FROM Stock_history Where Id = " + stockHistoryId, conn);
             try
             {
                 cmd.ExecuteNonQuery();
-                MessageBox.Show(productId);
-                conn.Close();
+                new ProductModel().updateStockProduct(productNo.ToString(), quantity, 0);
             }
             catch (SqlException ex)
             {

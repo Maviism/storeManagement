@@ -154,8 +154,6 @@ namespace storeManagement.MVVM.View
             }
         }
 
-
-
         private void addScannedProductToTransactionList(int temp)
         {
             foreach (ProductModel row in viewModel.ProductList)

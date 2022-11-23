@@ -149,6 +149,25 @@ namespace storeManagement.MVVM.Model
             }
         }
 
+        public void updateStockProduct(string productNo, int quantity, int n)
+        {
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand("UPDATE Products SET Quantity -= " + quantity + " WHERE Product_no = '" + productNo + "'", conn);
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
 
     }
 }
