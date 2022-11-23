@@ -19,7 +19,7 @@ namespace storeManagement.MVVM.ViewModel
     {
 
         #region Variable Declare
-        private decimal _cash;
+        private double _cash;
         private decimal _change;
         private int _productQty = 1;
         private decimal _totalpriceTransaction;
@@ -40,14 +40,14 @@ namespace storeManagement.MVVM.ViewModel
         {
             get { return _totalpriceTransaction; } 
             set { _totalpriceTransaction = value;
-                Change = Cash;
+                Change = Convert.ToDecimal(Cash);
                 OnPropertyChanged(); } 
         }
-        public decimal Cash
+        public double Cash
         {
             get { return _cash; }
             set { _cash = value;
-                Change = _cash;
+                Change = Convert.ToDecimal(_cash);
                 OnPropertyChanged(); }
         }
         public decimal Change
@@ -145,7 +145,7 @@ namespace storeManagement.MVVM.ViewModel
             {
                 int transactionId = new TransactionModel().getLastTransactionId();
                 DetailTransactionModel detailTransactionModel = new DetailTransactionModel();
-                if(SProduct != null)
+                if(TransactionList.Count != 0)
                 {
                     new TransactionModel().insertTransactionToDB(transactionId,TotalPriceTransaction);
                     foreach (TransactionModel obj in TransactionList)
@@ -153,11 +153,11 @@ namespace storeManagement.MVVM.ViewModel
                         detailTransactionModel.insertDetailTransactionToDB(transactionId, obj.Name, obj.Quantity, obj.TotalPrice);
                     }
                     refreshAllData();
-                    MessageBox.Show("Payment successfully");
+                    MessageBox.Show("Payment successfully", "Success");
                 }
                 else
                 {
-                    MessageBox.Show("you must add item first");
+                    MessageBox.Show("Can't process transaction, you haven't add a item", "Failed", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             });
 

@@ -86,8 +86,10 @@
                             <TextBlock Text="Change" FontSize="20"/>
                         </StackPanel>
                         <StackPanel>
-                            <TextBox Width="150" Text="{Binding Cash, UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox" Height="35" Margin="5"/>
-                            <TextBox Width="150" Text="{Binding Change}" IsEnabled="False" Height="35" Margin="5"/>
+                            <TextBox Width="150" Height="35" Margin="5"
+                                     Text="{Binding Cash, UpdateSourceTrigger=PropertyChanged}" 
+                                     PreviewTextInput="NumberValidationWithPointTextBox" Padding="5" FontSize="16"/>
+                            <TextBox Width="150" Text="{Binding Change}" IsEnabled="False" Padding="5" FontSize="16" Height="35" Margin="5"/>
                         </StackPanel>
                     </StackPanel>
                     <Button Margin="0, 25,20, 0" Content="Payment" Command="{Binding PaymentBtnCommand}" HorizontalAlignment="Right" Height="45" Style="{StaticResource SuccessButton}" VerticalAlignment="Top" Width="122"/>
@@ -96,18 +98,24 @@
 
 
         </StackPanel>
+        
+        <!--Scanner template-->
         <StackPanel Margin="0,70,0,0" Width="250">
-            <TextBlock Text="Select Scanner" Foreground="White" />
-            <ComboBox x:Name="scannerDevice" HorizontalAlignment="Left" Margin="0,10,0,10" VerticalAlignment="Top" Width="250"/>
+            <TextBlock Text="Select Scanner" FontSize="14" Foreground="WhiteSmoke" />
+            <ComboBox x:Name="scannerDevice" HorizontalAlignment="Left" Margin="0,5,0,10" VerticalAlignment="Top" Width="250"/>
             <Button Content="Start" Style="{StaticResource PrimaryButton}" x:Name="btnScanner" Click="btnToggleScanner_Click" Height="25"/>
             <Image x:Name="imgBox" Height="150" Margin="0,20,0,0" Width="250"/>
             <StackPanel Orientation="Horizontal">
                 <TextBox x:Name="productNo" Padding="3" Width="200" IsEnabled="False" Height="25"/>
-                <TextBox Text="1" x:Name="qtyScanner" TextAlignment="Right" Padding="3" Width="40" Margin="10,0,0,0"/>
+                <TextBox Text="1" x:Name="qtyScanner" TextAlignment="Right" 
+                         PreviewTextInput="NumberValidationTextBox"
+                         Padding="3" Width="40" Margin="10,0,0,0"/>
                 
             </StackPanel>
 
         </StackPanel>
+        <!--End Scanner template-->
+        
     </StackPanel>
 
 </UserControl>

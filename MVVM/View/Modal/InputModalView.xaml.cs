@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -85,6 +86,16 @@ namespace storeManagement.MVVM.View
                 conn.Close();
                 MessageBox.Show(ex.Message);
             }
+        }
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+        private void NumberValidationWithPointTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9.]+");
+            e.Handled = regex.IsMatch(e.Text);
         }
     }
 }

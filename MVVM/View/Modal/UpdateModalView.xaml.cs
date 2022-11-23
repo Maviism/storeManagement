@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -14,6 +15,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using storeManagement.Core;
 
 namespace storeManagement.MVVM.View
 {
@@ -31,9 +33,8 @@ namespace storeManagement.MVVM.View
             getProduct();
         }
 
-        // TODO Better to take all of item product from parent without hitting db again
 
-        SqlConnection conn = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog=StoreManagement;Integrated Security = True;");
+        SqlConnection conn = new DBHelper().Connection;
 
         public void getProduct()
         {
@@ -58,7 +59,9 @@ namespace storeManagement.MVVM.View
             Product_noInput.Text = Convert.ToString(dataRecord[1]);
             Product_nameInput.Text = Convert.ToString(dataRecord[2]);
             Product_qtyInput.Text = Convert.ToString(dataRecord[3]);
-            Product_priceInput.Text = Convert.ToString(dataRecord[4]);
+            decimal a = Convert.ToDecimal(dataRecord[4]);// changing from , to . (0.0)
+            string txt = a.ToString(System.Globalization.CultureInfo.InvariantCulture);
+            Product_priceInput.Text = txt;
 
         }
 
@@ -82,6 +85,17 @@ namespace storeManagement.MVVM.View
             {
                 conn.Close();
             }
+        }
+
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+        private void NumberValidationWithPointTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9.]+");
+            e.Handled = regex.IsMatch(e.Text);
         }
 
     }

@@ -33,11 +33,14 @@
                     <TextBlock Text="Price" Style="{StaticResource LabelStyle}"/>
 
                 </StackPanel>
-                <StackPanel Margin="0,3,0,0">
-                    <TextBox x:Name="Product_noInput" Style="{StaticResource TextBoxStyle}"/>
+                <StackPanel Margin="0,3,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBox x:Name="Product_noInput"  Style="{StaticResource TextBoxStyle}"
+                             PreviewTextInput="NumberValidationTextBox"/>
                     <TextBox x:Name="Product_nameInput" Style="{StaticResource TextBoxStyle}"/>
-                    <TextBox x:Name="Product_qtyInput" Style="{StaticResource TextBoxStyle}"/>
-                    <TextBox x:Name="Product_priceInput" Style="{StaticResource TextBoxStyle}"/>
+                    <TextBox x:Name="Product_qtyInput" Style="{StaticResource TextBoxStyle}"
+                             PreviewTextInput="NumberValidationTextBox"/>
+                    <TextBox x:Name="Product_priceInput" Style="{StaticResource TextBoxStyle}"
+                             PreviewTextInput="NumberValidationWithPointTextBox"/>
                 </StackPanel>
             </StackPanel>
 
@@ -45,13 +48,13 @@
                 <Button Style="{StaticResource DangerButton}" IsCancel="True" Margin="0,0,15,0" >
                     <StackPanel Orientation="Horizontal">
                         <fa:FontAwesome Icon="Close" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                        <Label Content="Cancel" Foreground="WhiteSmoke"/>
+                        <TextBlock Text="Cancel" Margin="5,0,0,0" Foreground="WhiteSmoke"/>
                     </StackPanel>
                 </Button>
                 <Button Style="{StaticResource SuccessButton}" Click="Button_Click">
                     <StackPanel Orientation="Horizontal">
                         <fa:FontAwesome Icon="Check" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                        <TextBlock Text="Add item" Foreground="WhiteSmoke"/>
+                        <TextBlock Text="Add item" Margin="5,0,0,0" Foreground="WhiteSmoke"/>
                     </StackPanel>
                 </Button>
             </WrapPanel>
