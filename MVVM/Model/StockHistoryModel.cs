@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Data;
 using System.Data.SqlClient;
-using System.Diagnostics;
 using System.Windows;
 using storeManagement.Core;
 
@@ -24,8 +23,22 @@ namespace storeManagement.MVVM.Model
             conn.Close();
             return dt;
         }
-
-        public void getSingleStokHistory(string stockHistoryId)
+        public void ConvertingProduct(IDataRecord dataRecord)
+        {
+            productNo = Convert.ToInt32(dataRecord[1]);
+            quantity = Convert.ToInt32(dataRecord[2]);
+        }
+        public void insertStockHistory(int productNo, int qty)
+        {
+            SqlCommand cmd = new SqlCommand("INSERT INTO Stock_history(Product_no, Quantity) VALUES (@Product_no, @Quantity)", conn);
+            cmd.Parameters.AddWithValue("@Product_no", productNo);
+            cmd.Parameters.AddWithValue("@Quantity", qty);
+            conn.Open();
+            cmd.ExecuteNonQuery();
+            conn.Close();
+            MessageBox.Show("Update stock successfully");
+        }
+        public void getSingleStokHistory(int stockHistoryId)
         {
             SqlCommand cmd = new SqlCommand("SELECT * FROM Stock_history WHERE Id = " + stockHistoryId, conn);
 
@@ -37,25 +50,7 @@ namespace storeManagement.MVVM.Model
 
             reader.Close();
         }
-
-        public void ConvertingProduct(IDataRecord dataRecord)
-        {
-            productNo = Convert.ToInt32(dataRecord[1]);
-            quantity = Convert.ToInt32(dataRecord[2]);
-        }
-
-        public void insertStockHistory(int productNo, int qty)
-        {
-            SqlCommand cmd = new SqlCommand("INSERT INTO Stock_history(Product_no, Quantity) VALUES (@Product_no, @Quantity)", conn);
-            cmd.Parameters.AddWithValue("@Product_no", productNo);
-            cmd.Parameters.AddWithValue("@Quantity", qty);
-            conn.Open();
-            cmd.ExecuteNonQuery();
-            conn.Close();
-            MessageBox.Show("Update stock successfully");
-        }
-
-        public void deleteStockHistory(string stockHistoryId)
+        public void deleteStockHistory(int stockHistoryId)
         {
             conn.Open();
             getSingleStokHistory(stockHistoryId);

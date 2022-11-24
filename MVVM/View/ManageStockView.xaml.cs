@@ -21,7 +21,7 @@ namespace storeManagement.MVVM.View
             Products.SelectAllCells();
             Products.ClipboardCopyMode = DataGridClipboardCopyMode.IncludeHeader;
             ApplicationCommands.Copy.Execute(null, Products);
-            string resultat = (string)Clipboard.GetData(DataFormats.CommaSeparatedValue);//for csv
+            //string resultat = (string)Clipboard.GetData(DataFormats.CommaSeparatedValue);
             string result = (string)Clipboard.GetData(DataFormats.Text);
             Products.UnselectAllCells();
             System.IO.StreamWriter file1 = new System.IO.StreamWriter(@"D:\Codes\c#\storeManagement\Exports\products.xls");

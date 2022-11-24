@@ -47,7 +47,6 @@ namespace storeManagement.MVVM.ViewModel
                 OnPropertyChanged();
             } 
         }
-
         public object CurrentView
         {
             get { return _currentView; }
@@ -81,6 +80,7 @@ namespace storeManagement.MVVM.ViewModel
                 HomeVM.TotalItem = dt.Rows.Count;
                 HomeVM.TotalTransaction = transactionModel.getTotalTransaction(DateTime.Today.ToString("yyyy-MM-dd"));
                 HomeVM.DailyIncome = transactionModel.getDailyIncome();
+                HomeVM.OutOfStockProduct = productModel.getOutOfStockProduct();
             });
             
             TransactionViewCommand = new RelayCommand(o =>
@@ -98,7 +98,7 @@ namespace storeManagement.MVVM.ViewModel
             SalesReportViewCommand = new RelayCommand(o =>
             {
                 CurrentView = SalesReportVM;
-
+                SalesReportVM.RefreshData();
             });
 
             timer = new DispatcherTimer();

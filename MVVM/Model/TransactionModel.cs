@@ -1,19 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using storeManagement.Core;
-using System.Diagnostics;
-using System.Security.RightsManagement;
+
 
 namespace storeManagement.MVVM.Model
 {
     internal class TransactionModel
     {
         #region Properties
+        // how if use inheritance from productmodel?
         public int NoIndex { get; set; }
         public int TransactionId { get; set; }
         public int ProductNo { get; set; }

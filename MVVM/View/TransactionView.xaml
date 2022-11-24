@@ -71,9 +71,9 @@
                             <DataGridTextColumn Header="Qty" Width="100" 
                                                 Binding="{Binding Quantity}" IsReadOnly="True"/>
                             <DataGridTextColumn Header="Price" Width="120" 
-                                                Binding="{Binding Price}" IsReadOnly="True"/>
+                                                Binding="{Binding Price , StringFormat=C}" IsReadOnly="True"/>
                             <DataGridTextColumn Header="Total Price" Width="*" 
-                                                Binding="{Binding TotalPrice}" IsReadOnly="True"/>
+                                                Binding="{Binding TotalPrice, StringFormat=C}" IsReadOnly="True"/>
                         </DataGrid.Columns>
 
                     </DataGrid>
@@ -87,9 +87,9 @@
                         </StackPanel>
                         <StackPanel>
                             <TextBox Width="150" Height="35" Margin="5"
-                                     Text="{Binding Cash, UpdateSourceTrigger=PropertyChanged}" 
+                                     Text="{Binding Cash, UpdateSourceTrigger=PropertyChanged, StringFormat=C}" 
                                      PreviewTextInput="NumberValidationWithPointTextBox" Padding="5" FontSize="16"/>
-                            <TextBox Width="150" Text="{Binding Change}" IsEnabled="False" Padding="5" FontSize="16" Height="35" Margin="5"/>
+                            <TextBox Width="150" Text="{Binding Change, StringFormat=C}" IsEnabled="False" Padding="5" FontSize="16" Height="35" Margin="5"/>
                         </StackPanel>
                     </StackPanel>
                     <Button Margin="0, 25,20, 0" Content="Payment" Command="{Binding PaymentBtnCommand}" HorizontalAlignment="Right" Height="45" Style="{StaticResource SuccessButton}" VerticalAlignment="Top" Width="122"/>

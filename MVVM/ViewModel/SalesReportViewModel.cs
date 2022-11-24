@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using storeManagement.Core;
 using storeManagement.MVVM.Model;
 
@@ -33,13 +29,11 @@ namespace storeManagement.MVVM.ViewModel
             return new DataTable();
         }
 
-        public SalesReportViewModel()
+        public void RefreshData()
         {
             TransactionList = transactionModel.getAllTransaction();
-
-            transactionModels = new ObservableCollection<TransactionModel>();
-
-            foreach(DataRow row in TransactionList.Rows)
+            transactionModels.Clear();
+            foreach (DataRow row in TransactionList.Rows)
             {
                 transactionModels.Add(
                     new TransactionModel()
@@ -51,7 +45,12 @@ namespace storeManagement.MVVM.ViewModel
                     }
              );
             }
+        }
 
+        public SalesReportViewModel()
+        {
+            transactionModels = new ObservableCollection<TransactionModel>();
+            TransactionList = transactionModel.getAllTransaction();
         }
 
 

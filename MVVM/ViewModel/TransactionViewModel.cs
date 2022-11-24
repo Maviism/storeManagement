@@ -1,17 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using storeManagement.Core;
 using System.Windows;
 using storeManagement.MVVM.Model;
-using System.Diagnostics;
 using System.Collections.ObjectModel;
-using System.Windows.Controls;
-using storeManagement.MVVM.View.Modal;
+
 
 namespace storeManagement.MVVM.ViewModel
 {

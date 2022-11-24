@@ -1,13 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
-using System.Windows.Documents;
-using LiveCharts;
-using LiveCharts.Wpf;
-using LiveChartsCore;
-using LiveChartsCore.SkiaSharpView;
 using storeManagement.Core;
 using storeManagement.MVVM.Model;
 
@@ -30,8 +22,6 @@ namespace storeManagement.MVVM.ViewModel
 
         public DataTable OutOfStockProduct { get; set; }
         public decimal DailyIncome { get; set; }
-        public int SoldoutItem { get; set; }
-        public decimal TotalAmount { get; set; }
         public int TotalItem { get; set; }
 
 
@@ -41,7 +31,6 @@ namespace storeManagement.MVVM.ViewModel
             DataTable dt = productModel.getAllProduct();
             TotalItem = dt.Rows.Count;
             OutOfStockProduct = productModel.getOutOfStockProduct();
-            SoldoutItem = 0;
             TotalTransaction = transactionModel.getTotalTransaction(DateTime.Today.ToString("yyyy-MM-dd"));
             DailyIncome = transactionModel.getDailyIncome();
             

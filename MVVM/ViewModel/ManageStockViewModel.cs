@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
 using storeManagement.Core;
 using storeManagement.MVVM.Model;
 using storeManagement.MVVM.View;
@@ -99,7 +92,7 @@ namespace storeManagement.MVVM.ViewModel
 
             DeleteStockBtnCommand = new RelayCommand(o =>
             {
-                stockHistory.deleteStockHistory(o.ToString());
+                stockHistory.deleteStockHistory(Convert.ToInt32(o.ToString()));
                 StockHistory = stockHistory.getAllStockHistory();
                 Products = product.getAllProduct();
             });

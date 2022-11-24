@@ -25,6 +25,7 @@ namespace storeManagement.MVVM.View
     public partial class UpdateModalView : Window
     {
         string ProductNo;
+        string ProductId;
 
         public UpdateModalView(string Id)
         {
@@ -55,7 +56,7 @@ namespace storeManagement.MVVM.View
 
         public void ShowProduct(IDataRecord dataRecord)
         {
-            Trace.WriteLine(String.Format("{0}, {1}", dataRecord[0], dataRecord[1]));
+            ProductId = Convert.ToString(dataRecord[0]);
             Product_noInput.Text = Convert.ToString(dataRecord[1]);
             Product_nameInput.Text = Convert.ToString(dataRecord[2]);
             Product_qtyInput.Text = Convert.ToString(dataRecord[3]);
@@ -71,11 +72,11 @@ namespace storeManagement.MVVM.View
         {
             conn.Open();
 
-            SqlCommand cmd = new SqlCommand("UPDATE Products SET Product_name = '" + Product_nameInput.Text + "', Price = " + Product_priceInput.Text + ", Quantity = "+ Product_qtyInput.Text + " WHERE Product_no = "+ Product_noInput.Text, conn);
+            SqlCommand cmd = new SqlCommand("UPDATE Products SET Product_name = '" + Product_nameInput.Text + "', Price = " + Product_priceInput.Text + ", Quantity = "+ Product_qtyInput.Text + ", Product_no = " + Product_noInput.Text + " WHERE Product_id = " + ProductId, conn);
             try
             {
                 cmd.ExecuteNonQuery();
-                MessageBox.Show("Data berhasil diubah");
+                MessageBox.Show("Product information has been changed", "Successfuly");
             }
             catch (SqlException ex)
             {
@@ -85,6 +86,7 @@ namespace storeManagement.MVVM.View
             {
                 conn.Close();
             }
+            this.Close();
         }
 
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
