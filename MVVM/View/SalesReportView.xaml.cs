@@ -24,5 +24,20 @@ namespace storeManagement.MVVM.View
         {
             InitializeComponent();
         }
+
+        private void ExportSalesReportToExcel(object sender, EventArgs e)
+        {
+            Sales_report.SelectAllCells();
+            Sales_report.ClipboardCopyMode = DataGridClipboardCopyMode.IncludeHeader;
+            ApplicationCommands.Copy.Execute(null, Sales_report);
+            string result = (string)Clipboard.GetData(DataFormats.Text);
+            Sales_report.UnselectAllCells();
+            System.IO.StreamWriter file1 = new System.IO.StreamWriter(@"D:\Codes\c#\storeManagement\Exports\Sales_report.xls");
+            file1.WriteLine(result.Replace(',', ' '));
+            file1.Close();
+
+            MessageBox.Show("Exporting data to Sales_report.xls");
+        }
+
     }
 }
