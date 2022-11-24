@@ -33,11 +33,7 @@ namespace storeManagement.MVVM.ViewModel
         public int SoldoutItem { get; set; }
         public decimal TotalAmount { get; set; }
         public int TotalItem { get; set; }
-        public string[] Labels { get; set; }
-        public Func<double, string> YFormatter { get; set; }
-        public ISeries[] SeriesCollection { get; set; }
 
-        public string[] Values { get; set; }
 
 
         public HomeViewModel()
@@ -48,19 +44,6 @@ namespace storeManagement.MVVM.ViewModel
             SoldoutItem = 0;
             TotalTransaction = transactionModel.getTotalTransaction(DateTime.Today.ToString("yyyy-MM-dd"));
             DailyIncome = transactionModel.getDailyIncome();
-
-            //Chart
-            Labels = new[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" };
-            YFormatter = value => value.ToString("C");
-            Values = new string[] { "1", "2", "3", "4", "5", };
-
-            SeriesCollection = new ISeries[]
-            {
-                new LineSeries<double>
-                {
-                    Values = new double[] {5,10,20,25}
-                }
-            };
             
         }
     }
