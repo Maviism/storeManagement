@@ -26,10 +26,5 @@ namespace storeManagement.MVVM.View
         {
             InitializeComponent();
         }
-
-        void DataGrid_LoadingRow(object sender, DataGridRowEventArgs e)
-        {
-            e.Row.Header = (e.Row.GetIndex()).ToString();
-        }
     }
 }

@@ -9,7 +9,7 @@
 
 
 CREATE TABLE Transactions(
-	Transaction_id INT PRIMARY KEY,
+	Transaction_id INT IDENTITY(1000,1) PRIMARY KEY,
 	Total_price DECIMAL(15,2),
 	Created_at DATETIME NOT NULL DEFAULT GETDATE()
 );
@@ -50,15 +50,12 @@ UPDATE Products SET Quantity += 5 WHERE Product_name = 'Yurivtsev'
 
 SELECT * FROM Products WHERE Quantity < 1
 
-insert into Products (Product_no, Product_name, Price, Quantity) values (1, 'Milka ', 5, 20);
-insert into Products (Product_no, Product_name, Price, Quantity) values (2, 'Indomie', 2.5, 20);
-insert into Products (Product_no, Product_name, Price, Quantity) values (3, 'Nugget', 2.75, 20);
-insert into Products (Product_no, Product_name, Price, Quantity) values (4, 'Corn', 3, 20);
-insert into Products (Product_no, Product_name, Price, Quantity) values (5, 'Chicken', 4, 20);
-insert into Products (Product_no, Product_name, Price, Quantity) values (6, 'Vickar', 42, 20);
-insert into Products (Product_no, Product_name, Price, Quantity) values (7, 'Yurivtsev', 9, 20);
-insert into Products (Product_no, Product_name, Price, Quantity) values (8, 'Bayle', 89, 20);
-insert into Products (Product_no, Product_name, Price, Quantity) values (9, 'Canada', 72, 20);
+insert into Products (Product_no, Product_name, Price, Quantity) values (100001, 'Milka ', 5, 20);
+insert into Products (Product_no, Product_name, Price, Quantity) values (100002, 'Indomie', 2.5, 20);
+insert into Products (Product_no, Product_name, Price, Quantity) values (100003, 'Nugget', 2.75, 20);
+insert into Products (Product_no, Product_name, Price, Quantity) values (100004, 'Corn', 3, 20);
+insert into Products (Product_no, Product_name, Price, Quantity) values (200004, 'Chips Chicken', 4, 20);
+
 
 insert into Transactions (Total_price) VALUES (20)
 
@@ -68,6 +65,9 @@ DROP TABLE Detail_transaction
 DROP TABLE Stock_history
 
 TRUNCATE TABLE Transactions
+TRUNCATE TABLE Detail_transaction
+TRUNCATE TABLE Stock_history
+TRUNCATE TABLE Products
 
 SELECT TOP 1 * FROM Transactions ORDER BY Transaction_id DESC
 SELECT COUNT(Transaction_id) FROM Transactions WHERE CONVERT(VARCHAR(25), Created_at,126) LIKE '%2022-10-28%'

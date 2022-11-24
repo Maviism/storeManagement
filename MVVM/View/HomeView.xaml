@@ -98,12 +98,11 @@
                     <StackPanel>
                         <TextBlock Text="Out of stock product!" FontSize="24" Foreground="#D81E17" FontWeight="Medium"/>
                         <DataGrid Style="{StaticResource DataGridStyle}"
-                                  LoadingRow="DataGrid_LoadingRow"
                                   ItemsSource="{Binding OutOfStockProduct.DefaultView}"
                                   Width="300" Height="300" Background="#10ff0000">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Product Name" Binding="{Binding Product_name}" Width="150" IsReadOnly="True"/>
-                                <DataGridTextColumn Header="Product No" Width="*" IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Product Name" Binding="{Binding Product_name}" Width="150" IsReadOnly="True" FontSize="16"/>
+                                <DataGridTextColumn Header="Product No" FontSize="16" Width="*" Binding="{Binding Product_no}" IsReadOnly="True"/>
                             </DataGrid.Columns>           
                         </DataGrid>
                     </StackPanel>
@@ -113,41 +112,30 @@
                 <Border Height="300" Width="590" CornerRadius="8">
                     <StackPanel>
                         <Label Content="Monthly Transaction" Foreground="WhiteSmoke" FontSize="24" FontWeight="Medium"/>
-                        <lvc:CartesianChart LegendLocation="None" Margin="10" Height="250" >
+                        <lvc:CartesianChart LegendLocation="None" Margin="10" Height="250" 
+                                   Series="{Binding SeriesCollection}"         >
                             <lvc:CartesianChart.ToolTip>
                                 <lvc:DefaultTooltip Background="Black" Foreground="#f4f3f6"  />
                             </lvc:CartesianChart.ToolTip>
                                 
                             <lvc:CartesianChart.AxisX>
-                                <lvc:Axis Foreground="Black" FontSize="14" ShowLabels="True" Labels="1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19">
+                                <lvc:Axis Foreground="Black" Title="Date" MinValue="1" FontSize="14" ShowLabels="True" Labels="{Binding Labels}">
                                     <lvc:Axis.Separator>
-                                        <lvc:Separator Step="2" StrokeThickness="0"/>
+                                        <lvc:Separator Step="1" StrokeThickness="0"/>
                                     </lvc:Axis.Separator>
                                 </lvc:Axis>
                             </lvc:CartesianChart.AxisX>
-                            
-                            <lvc:CartesianChart.AxisY>
-                                <lvc:Axis Foreground="Black" ShowLabels="True" MinValue="0" MaxValue="20">
-                                    <lvc:Axis.Separator>
-                                        <lvc:Separator Step="2" StrokeThickness="0"/>
-                                    </lvc:Axis.Separator>
-                                </lvc:Axis>
-                            </lvc:CartesianChart.AxisY>
 
-                            <lvc:CartesianChart.Series>
-                                <lvc:LineSeries Fill="#7164b2" StrokeThickness="4" PointGeometrySize="0" Values="4,5,7,10,5,10,15,10,4,1,6,3,12,0,0,0,0,18,19,20,5,,,,,,,,">
-                                    <lvc:LineSeries.Stroke>
-                                        <LinearGradientBrush>
-                                            <GradientStop Color="Transparent" Offset="0"/>
-                                            <GradientStop Color="#f782ab" Offset="0.23"/>
-                                            <GradientStop Color="Transparent" Offset="2.5"/>
-                                        </LinearGradientBrush>
-                                    </lvc:LineSeries.Stroke>        
-                                </lvc:LineSeries>        
-                            </lvc:CartesianChart.Series>
-                        </lvc:CartesianChart>
-                        
-                    </StackPanel>
+                                <lvc:CartesianChart.AxisY>
+                                    <lvc:Axis Foreground="Black" ShowLabels="True" MinValue="0" LabelFormatter="{Binding YFormatter}">
+                                        <lvc:Axis.Separator>
+                                            <lvc:Separator  StrokeThickness="0"/>
+                                        </lvc:Axis.Separator>
+                                    </lvc:Axis>
+                                </lvc:CartesianChart.AxisY>
+                            </lvc:CartesianChart>
+                          
+                        </StackPanel>
                 </Border>
                 <!--End Chart-->
                

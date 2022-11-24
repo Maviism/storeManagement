@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Threading;
 using storeManagement.Core;
 using storeManagement.MVVM.Model;
 
@@ -23,7 +24,29 @@ namespace storeManagement.MVVM.ViewModel
         public ManageStockViewModel ManageStockVM { get; set; }
         public SalesReportViewModel SalesReportVM { get; set; }
 
+        DispatcherTimer timer;
+
         private object _currentView;
+        private string _currentDate;
+        private string _currentTime;
+        public string CurrentDate 
+        {
+            get { return _currentDate; }
+            set
+            {
+                _currentDate = value;
+                OnPropertyChanged();
+            } 
+        }
+        public string CurrentTime 
+        {
+            get { return _currentTime; }
+            set
+            {
+                _currentTime = value;
+                OnPropertyChanged();
+            } 
+        }
 
         public object CurrentView
         {
@@ -36,6 +59,12 @@ namespace storeManagement.MVVM.ViewModel
 
         ProductModel productModel = new ProductModel();
         TransactionModel transactionModel = new TransactionModel();
+
+        void timer_Tick(object sender, EventArgs e)
+        {
+            CurrentDate = DateTime.Now.ToString("MM/dd/yyyy");
+            CurrentTime = DateTime.Now.ToString("HH:mm:ss tt");
+        }
         public MainViewModel()
         {
             HomeVM = new HomeViewModel();
@@ -72,6 +101,10 @@ namespace storeManagement.MVVM.ViewModel
 
             });
 
+            timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(1);
+            timer.Tick += new EventHandler(timer_Tick);
+            timer.Start();
         }
 
     }

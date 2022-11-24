@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using storeManagement.Core;
+using storeManagement.MVVM.Model;
 
 namespace storeManagement.MVVM.View
 {
@@ -25,6 +26,7 @@ namespace storeManagement.MVVM.View
         public InputModalView()
         {
             InitializeComponent();
+            Product_qtyInput.Text = "0";
         }
 
         SqlConnection conn = new DBHelper().Connection;
@@ -63,7 +65,7 @@ namespace storeManagement.MVVM.View
             Product_priceInput.Clear();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void BtnSubmit_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -77,6 +79,10 @@ namespace storeManagement.MVVM.View
                     conn.Open();
                     cmd.ExecuteNonQuery();
                     conn.Close();
+                    if(Convert.ToInt32(Product_qtyInput.Text) > 0)
+                    {
+                        new StockHistoryModel().insertStockHistory(Convert.ToInt32(Product_noInput.Text), Convert.ToInt32(Product_qtyInput.Text));
+                    }
                     clearForm();
                     MessageBox.Show("Successfully registerd");
                 }

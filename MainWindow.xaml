@@ -30,12 +30,7 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <TextBlock Text="Store Managemet System" 
-                       Foreground="#f4f4f4"
-                       FontSize="16"
-                       VerticalAlignment="Center"
-                       HorizontalAlignment="Center"
-                       />
+            <Image Source="/img/logo.png" Margin="7,0,10,0" />
 
             <Border Grid.Row="1" Background="#E7B183" Margin="10,0,10,10" CornerRadius="20" Padding="0,15,0,0">
                 <StackPanel >
@@ -63,6 +58,14 @@
             <Border Grid.Column="1" Grid.Row="1" Margin="5,0,10,10" Background="#E7B183" CornerRadius="15" Padding="15,10,10,10">
                 <ContentControl HorizontalAlignment="Left" 
                                 Content="{Binding CurrentView}"/>
+            </Border>
+
+            <Border Grid.Column="1" Grid.Row="0" Margin="0,10,40,0">
+                <StackPanel>
+                <TextBlock Text="{Binding CurrentDate}" FontWeight="Medium" Foreground="WhiteSmoke" HorizontalAlignment="Right" FontSize="22"/>
+                <TextBlock Text="{Binding CurrentTime}" Foreground="WhiteSmoke" HorizontalAlignment="Right" FontSize="20"/>
+                    
+                </StackPanel>
             </Border>
             
         </Grid>

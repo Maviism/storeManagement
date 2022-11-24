@@ -7,7 +7,8 @@
         xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:fa="http://schemas.fontawesome.io/icons/"
         mc:Ignorable="d"
-        Title="Add new item" Height="400" Width="500"
+        Icon="D:\Codes\c#\storeManagement\sms.ico"
+        Title="Add new item | Store Management System" Height="400" Width="500"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
         Background="Transparent">
@@ -51,7 +52,7 @@
                         <TextBlock Text="Cancel" Margin="5,0,0,0" Foreground="WhiteSmoke"/>
                     </StackPanel>
                 </Button>
-                <Button Style="{StaticResource SuccessButton}" Click="Button_Click">
+                <Button Style="{StaticResource SuccessButton}" Click="BtnSubmit_Click">
                     <StackPanel Orientation="Horizontal">
                         <fa:FontAwesome Icon="Check" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" />
                         <TextBlock Text="Add item" Margin="5,0,0,0" Foreground="WhiteSmoke"/>

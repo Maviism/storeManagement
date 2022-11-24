@@ -42,7 +42,7 @@
                             Command="{Binding RefreshDataCommand}">
                             <StackPanel Orientation="Horizontal">
                                 <fa:FontAwesome Icon="Refresh" VerticalAlignment="Center" FontSize="20"/>
-                                <TextBlock Text="Refresh data" Foreground="WhiteSmoke"/>
+                                <TextBlock Text="Refresh data" Margin="5,0,0,0" Foreground="WhiteSmoke"/>
                             </StackPanel>
                         </Button>
                     </StackPanel>
@@ -52,20 +52,19 @@
             <!--Datagrid-->
             <Border Grid.Row="1" Margin="3,5,0,0">
                 <DataGrid x:Name="Products"
+                          RowDetailsVisibilityMode="Visible"
                           Style="{StaticResource DataGridStyle}"
                           ItemsSource="{Binding Products.DefaultView}"
                           Width="800" Height="400"
-                          
                           ColumnWidth="*"
                           RowStyle="{StaticResource RowStyle}">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="No" Width="30"/>
                         <DataGridTextColumn Header="Product No" 
                                             Binding="{Binding Product_no}" Width="100"/>
                         <DataGridTextColumn Header="Product Name"
                                             IsReadOnly="True"
                                             Binding="{Binding Product_name}"
-                                            Width="220"/>
+                                            Width="270"/>
                         <DataGridTextColumn Header="Quantity" 
                                             Binding="{Binding Quantity}"
                                             Width="120"/>
@@ -74,7 +73,7 @@
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="$"/>
-                                        <TextBlock Text="{Binding Price}" />
+                                        <TextBlock Text="{Binding Price}"/>
                                     </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
@@ -119,21 +118,20 @@
                           ColumnWidth="*"
                           RowStyle="{StaticResource RowStyle}">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="No" Width="30"/>
                         <DataGridTextColumn Header="Product No" 
                                             Binding="{Binding Product_no}" Width="100"/>
                         <DataGridTextColumn Header="Product Name"
                                             IsReadOnly="True"
                                             Binding="{Binding Product_name}"
-                                            Width="220"/>
+                                            Width="270"/>
                         <DataGridTextColumn Header="Quantity" 
                                             Binding="{Binding Quantity}"
                                             Width="120"/>
                         <DataGridTextColumn Header="Datetime" 
                                             Binding="{Binding Created_at}"
-                                            Width="170"/>
+                                            Width="190"/>
 
-                        <DataGridTemplateColumn Header="Action" Width="120">
+                        <DataGridTemplateColumn Header="Action" Width="*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">

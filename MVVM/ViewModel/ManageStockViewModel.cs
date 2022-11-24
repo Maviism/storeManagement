@@ -62,6 +62,7 @@ namespace storeManagement.MVVM.ViewModel
             InputModalView inputModal = new InputModalView();
             inputModal.ShowDialog();
             Products = product.getAllProduct();
+            StockHistory = stockHistory.getAllStockHistory();
         }
 
         public ManageStockViewModel()
@@ -79,7 +80,7 @@ namespace storeManagement.MVVM.ViewModel
 
             DeleteDataBtnCommand = new RelayCommand(o =>
             {
-                product.deleteProduct(o);
+                product.deleteProduct(Convert.ToInt32(o));
                 Products = product.getAllProduct();
             });
 

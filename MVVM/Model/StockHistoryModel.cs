@@ -16,7 +16,7 @@ namespace storeManagement.MVVM.Model
 
         public DataTable getAllStockHistory()
         {
-            SqlCommand cmd = new SqlCommand("SELECT Stock_history.Id ,Stock_history.Product_no, Products.Product_name, Stock_history.Quantity, Stock_history.Created_at FROM Stock_history INNER JOIN Products ON Stock_history.Product_no = Products.Product_no", conn);
+            SqlCommand cmd = new SqlCommand("SELECT Stock_history.* , Products.Product_name FROM Stock_history INNER JOIN Products ON Stock_history.Product_no = Products.Product_no", conn);
             DataTable dt = new DataTable();
             conn.Open();
             SqlDataReader sdr = cmd.ExecuteReader();

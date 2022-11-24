@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:storeManagement.MVVM.View"
         mc:Ignorable="d"
-        Title="Update item" Height="450" Width="500"
+        Icon="D:\Codes\c#\storeManagement\sms.ico"
+        Title="Update Product Information | Store Management System" Height="450" Width="500"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
         Background="Transparent">

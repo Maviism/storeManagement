@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:storeManagement.MVVM.View.Modal"
         mc:Ignorable="d"
         Icon="D:\Codes\c#\storeManagement\sms.ico"
-        Title="Update item | Store Management System" Height="450" Width="500"
+        Title="Update stock product | Store Management System" Height="450" Width="500"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
         Background="Transparent" >
