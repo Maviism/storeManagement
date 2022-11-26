@@ -25,14 +25,16 @@
                             </StackPanel>
                         </Border>
 
-                        <StackPanel Orientation="Horizontal" Margin="0,10,0,10">
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,10" >
                             <ComboBox x:Name="SelectedProduct" 
                               ItemsSource="{Binding Path=ProductList}"
                               SelectedItem="{Binding Path=SProduct}"
-                              DisplayMemberPath="ProductName" VerticalAlignment="Top" Width="250" Height="28" />
-                            <TextBox x:Name="NumberTextBox" Margin="5,0,5,0" PreviewTextInput="NumberValidationTextBox"
-                                HorizontalAlignment="Left" Height="28" FontSize="18" TextWrapping="Wrap" Text="{Binding ProductQty}" VerticalAlignment="Top" Width="33"/>
-                            <Label Content="Adet" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                              DisplayMemberPath="ProductName" Width="250" Height="28" />
+                            <TextBox x:Name="NumberTextBox" Margin="5,0,0,0" 
+                                     PreviewTextInput="NumberValidationTextBox" 
+                                     Height="28" Width="33" FontSize="18" TextWrapping="Wrap" 
+                                     Text="{Binding ProductQty}"  />
+                            <TextBlock Text="Qty" FontSize="14"  Height="28" Padding="4"/>
                             <Button Content="Add item" HorizontalAlignment="Left" VerticalAlignment="Center" Width="94" Style="{StaticResource PrimaryButton}"  Command="{Binding AddItemBtnCommand}"/>
                         </StackPanel>
                     </StackPanel>
